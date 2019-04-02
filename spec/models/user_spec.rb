@@ -4,7 +4,6 @@ RSpec.describe User, type: :model do
   describe "Relationship" do
     it {should have_many :items}
     it {should have_many :orders}
-
     #verify that users don't need items through order_items
   end
 
