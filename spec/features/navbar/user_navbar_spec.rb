@@ -27,11 +27,11 @@ RSpec.describe 'as a registered user' do
             
             click_link("Home")
             expect(current_path).to eq(root_path)
+            ## Test "Logged in as <username> here
             
             click_link("Log Out")
             expect(current_path).to eq(root_path)
             expect(page).to_not have_link("Profile")
-            ## Test "Logged in as <username" here
         end
     end
 end
