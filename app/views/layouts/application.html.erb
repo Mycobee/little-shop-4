@@ -9,6 +9,7 @@
   </head>
 
   <body>
+
     <% if current_user == nil %>
       <ul class="visitor-nav">
         <%= link_to 'Home', root_path %>
@@ -33,6 +34,7 @@
       </ul>
 
       
+
     <% end %>
     <%= yield %>
   </body>

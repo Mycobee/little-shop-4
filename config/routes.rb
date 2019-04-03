@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :login, only:[:index] do
   end
 
-  resources :users, only:[:new, :show] do
+
+  resources :users, only:[:new, :create, :show] do
   end
 end
