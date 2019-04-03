@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   resources :cart, only:[:index] do
   end
 
-  resources :cart, only:[:index] do
+  resources :login, only:[:index] do
+  end
+
+  resources :register, only:[:index] do
   end
 
 end
