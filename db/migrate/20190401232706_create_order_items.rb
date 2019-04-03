@@ -1,9 +1,9 @@
 class CreateOrderItems < ActiveRecord::Migration[5.1]
   def change
     create_table :order_items do |t|
-      t.float :order_price
+      t.float :price
       t.integer :quantity
-      t.boolean :fulfilled
+      t.boolean :fulfilled, default: false
 
       t.timestamps
     end
