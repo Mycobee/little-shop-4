@@ -16,7 +16,7 @@ RSpec.describe "login workflow" do
 
       # save_and_open_page
       click_button "Log In"
-      expect(page).to have_content("#{reg_user.name} logged in.")
+      expect(page).to have_content("Logged in as #{reg_user.name}")
       expect(current_path).to eq(user_path(reg_user))
     end
   end
@@ -36,7 +36,7 @@ RSpec.describe "login workflow" do
 
       # save_and_open_page
       click_button "Log In"
-      expect(page).to have_content("#{merch_user.name} logged in.")
+      expect(page).to have_content("Logged in as #{merch_user.name}")
       expect(current_path).to eq(merchant_dashboard_path(merch_user))
     end
   end
@@ -57,7 +57,7 @@ RSpec.describe "login workflow" do
 
       # save_and_open_page
       click_button "Log In"
-      expect(page).to have_content("#{admin_user.name} logged in.")
+      expect(page).to have_content("Logged in as #{admin_user.name}")
       expect(current_path).to eq(root_path)
     end
   end
