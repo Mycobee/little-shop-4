@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get '/login', to: 'sessions#new', as: :login
+  post '/login', to: 'sessions#create'
 
   resources :items, only:[:index] do
   end
@@ -14,10 +15,6 @@ Rails.application.routes.draw do
 
   resources :cart, only:[:index] do
   end
-
-  resources :login, only:[:index] do
-  end
-
 
   resources :users, only:[:new, :create, :show] do
   end
