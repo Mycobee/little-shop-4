@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe 'As a registered user' do
   describe 'when I visit my profile page' do
-    it 'I see all of my personal data on the page except password' do
+    xit 'I see all of my personal data on the page except password' do
 
       reg_user = User.create(name: 'John Peterson', address: '1011 west 13th St', city: 'Denver', state: "CO", zip_code: 80206, email: 'johnpeterson@gmail.com', password_digest: 'jp32@yolo', enabled: true, role: 0)
 
