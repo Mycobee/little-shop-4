@@ -34,7 +34,7 @@
       </ul>
 
       <% elsif current_user.role == 1 %>
-        <ul class="visitor-nav">
+        <ul class="merchant-nav">
           <%= link_to 'Home', root_path %>
           <%= link_to 'Items', items_path %>
           <%= link_to 'Merchants', merchants_path %>
@@ -42,7 +42,18 @@
           <%= link_to 'Log Out', '/logout' %>
           <p>Logged in as <%= current_user.name %></p>
         </ul>
+
+      <% elsif current_user.role == 2 %>
+        <ul class="admin-nav">
+          <%= link_to 'Home', root_path %>
+          <%= link_to 'Items', items_path %>
+          <%= link_to 'Merchants', merchants_path %>
+          <%= link_to 'Dashboard', 'admin/dashboard' %>
+          <%= link_to 'Log Out', '/logout' %>
+          <p>Logged in as <%= current_user.name %></p>
+        </ul>
     <% end %>
     <%= yield %>
+
   </body>
 </html>
