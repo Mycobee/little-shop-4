@@ -20,4 +20,24 @@ RSpec.describe "login workflow" do
       expect(current_path).to eq(user_path(reg_user))
     end
   end
+
+  context 'as a merchant' do
+    it "Allows user to login as a Merchant" do
+      merch_user = create(:user, role: 1)
+
+      visit root_path
+
+      click_link "Login"
+
+      expect(current_path).to eq(login_path)
+
+      fill_in "Email", with: "#{merch_user.email}"
+      fill_in "Password", with: "#{merch_user.password}"
+
+      # save_and_open_page
+      click_button "Log In"
+      expect(page).to have_content("#{merch_user.name} logged in.")
+      expect(current_path).to eq(merchant_path(merch_user))
+    end
+  end
 end
