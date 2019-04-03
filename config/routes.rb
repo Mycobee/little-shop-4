@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   # get '/merchant/dashboard/:id', to:'merchant/dashboard#show'
 
+  get '/profile/:id', to: 'users#show', as: :profile
+
   resources :items, only:[:index] do
   end
 
@@ -25,4 +27,5 @@ Rails.application.routes.draw do
 
   resources :users, only:[:new, :create, :show] do
   end
+
 end

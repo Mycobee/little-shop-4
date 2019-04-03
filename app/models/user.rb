@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :items
   has_secure_password
   validates_presence_of :name
-  validates_presence_of :email
+  validates :email, uniqueness: true, presence: true
   validates_presence_of :password, require: true
   validates_presence_of :address
   validates_presence_of :city
