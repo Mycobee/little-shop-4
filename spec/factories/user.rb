@@ -33,6 +33,6 @@ FactoryBot.define do
     sequence(:email) { |n| "admin_#{n}@gmail.com" }
     sequence(:name) { |n| "Admin Name #{n}" }
     role { 2 }
-    active { true }
+    enabled { true }
   end
 end
