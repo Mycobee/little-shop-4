@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  get '/login', to: 'sessions#new', as: :login
+
   resources :items, only:[:index] do
   end
 
@@ -15,7 +17,7 @@ Rails.application.routes.draw do
   resources :login, only:[:index] do
   end
 
-  resources :register, only:[:index] do
+  resources :users, only:[:new] do
   end
 
 end
