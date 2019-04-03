@@ -7,7 +7,7 @@ RSpec.describe 'As a registered user' do
 
       reg_user = User.create(name: 'John Peterson', address: '1011 west 13th St', city: 'Denver', state: "CO", zip_code: 80206, email: 'johnpeterson@gmail.com', password_digest: 'jp32@yolo', enabled: true, role: 1)
 
-      visit profile_path(reg_user)
+      visit "/profile"
 
       expect(page).to have_content("Name: #{reg_user.name}")
       expect(page).to have_content("Address: #{reg_user.address}")
