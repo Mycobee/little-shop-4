@@ -66,7 +66,6 @@ RSpec.describe 'registration' do
 
       expect(current_path).to eq(profile_path(last_user))
 
-      save_and_open_page
       click_link "Home"
 
       click_link "Register"
