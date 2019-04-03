@@ -7,7 +7,14 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new', as: :login
   post '/login', to: 'sessions#create'
 
+
+  # get '/merchant/dashboard/:id', to:'merchant/dashboard#show'
+
   resources :items, only:[:index] do
+  end
+
+  namespace :merchant do
+    resources :dashboard, only:[:show]
   end
 
   resources :merchants, only:[:index, :show] do
