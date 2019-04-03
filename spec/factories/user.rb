@@ -6,27 +6,27 @@ FactoryBot.define do
     sequence(:address) { |n| "Address #{n}" }
     sequence(:city) { |n| "City #{n}" }
     sequence(:state) { |n| "State #{n}" }
-    sequence(:zip) { |n| "Zip #{n}" }
+    sequence(:zip_code) { |n| "Zip #{n}" }
     role { 0 }
-    active { true }
+    enabled { true }
   end
   factory :inactive_user, parent: :user do
     sequence(:name) { |n| "Inactive User Name #{n}" }
     sequence(:email) { |n| "inactive_user_#{n}@gmail.com" }
-    active { false }
+    enabled { false }
   end
 
   factory :merchant, parent: :user do
     sequence(:email) { |n| "merchant_#{n}@gmail.com" }
     sequence(:name) { |n| "Merchant Name #{n}" }
     role { 1 }
-    active { true }
+    enabled { true }
   end
   factory :inactive_merchant, parent: :user do
     sequence(:email) { |n| "inactive_merchant_#{n}@gmail.com" }
     sequence(:name) { |n| "Inactive Merchant Name #{n}" }
     role { 1 }
-    active { false }
+    enabled { false }
   end
 
   factory :admin, parent: :user do
