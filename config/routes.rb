@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
 
-  get '/profile', to: 'reguser#show'
+   resources :users, only:[:new, :show]
 
 end
