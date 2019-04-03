@@ -16,8 +16,8 @@ RSpec.describe "login workflow" do
 
       # save_and_open_page
       click_button "Log In"
-      expect(page).to have_content("#{reg_user.name} logged in")
-      expect(current_path).to eq(user_path)
+      expect(page).to have_content("#{reg_user.name} logged in.")
+      expect(current_path).to eq(user_path(reg_user))
     end
   end
 end
