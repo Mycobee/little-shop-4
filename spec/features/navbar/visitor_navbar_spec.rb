@@ -17,7 +17,7 @@ RSpec.describe 'as a visitor' do
 
             click_link("Merchants")
             expect(current_path).to eq("/merchants")
-            
+
             click_link("Shopping Cart")
             expect(current_path).to eq("/cart")
 
@@ -25,7 +25,7 @@ RSpec.describe 'as a visitor' do
             expect(current_path).to eq("/login")
 
             click_link("Register")
-            expect(current_path).to eq("/register")
+            expect(current_path).to eq(new_user_path)
 
             click_link("Home")
             expect(current_path).to eq(root_path)
