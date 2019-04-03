@@ -13,6 +13,5 @@ RSpec.describe Item, type: :model do
     it {should validate_presence_of :image_url}
     it {should validate_presence_of :quantity}
     it {should validate_presence_of :base_price}
-    it {should validate_presence_of :enabled}
   end
 end

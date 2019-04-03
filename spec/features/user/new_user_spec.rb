@@ -25,4 +25,22 @@ RSpec.describe 'registration' do
     expect(last_user.email).to eq(email)
     expect(page).to have_content("Welcome, #{last_user.name}")
   end
+
+  describe 'sad path' do
+    it 'should fail with invalid/no information' do
+      visit new_user_path
+      # leave form empty
+      click_button 'Create User'
+
+      # save_and_open_page
+      expect(current_path).to eq(users_path)
+      expect(page).to have_content("Name can't be blank")
+      expect(page).to have_content("Address can't be blank")
+      expect(page).to have_content("City can't be blank")
+      expect(page).to have_content("State can't be blank")
+      expect(page).to have_content("Zip code can't be blank")
+      expect(page).to have_content("Email can't be blank")
+      expect(page).to have_content("Password can't be blank")
+    end
+  end
 end
