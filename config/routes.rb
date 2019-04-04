@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   resources :items, only:[:index] do
   end
 
-  namespace :dashboard do
-    get '/', to: 'dashboard#show'
+  namespace :merchant do
+    get '/', to: 'dashboard#show', as: :dashboard
     # resources :items, # TODO
   end
 
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     # resources :items, # TODO
   end
 
-  resources :merchants, only:[:index, :show] do
+  resources :merchants, only:[:index] do
   end
 
   resources :cart, only:[:index] do
