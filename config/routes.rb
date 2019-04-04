@@ -5,21 +5,25 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get '/login', to: 'sessions#new', as: :login
+  post '/login', to: 'sessions#create'
+
+
+  # get '/merchant/dashboard/:id', to:'merchant/dashboard#show'
 
   get '/profile/:id', to: 'users#show', as: :profile
 
   resources :items, only:[:index] do
   end
 
-  resources :merchants, only:[:index] do
+  namespace :merchant do
+    resources :dashboard, only:[:show]
+  end
+
+  resources :merchants, only:[:index, :show] do
   end
 
   resources :cart, only:[:index] do
   end
-
-  resources :login, only:[:index] do
-  end
-
 
   resources :users, only:[:new, :create, :show] do
   end

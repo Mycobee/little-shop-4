@@ -64,7 +64,7 @@ RSpec.describe 'registration' do
 
         last_user = User.last
 
-      expect(current_path).to eq(user_path(last_user))
+      expect(current_path).to eq(profile_path(last_user))
 
       click_link "Home"
 
@@ -78,7 +78,6 @@ RSpec.describe 'registration' do
       fill_in 'Zip code', with: '80015'
       fill_in 'Password', with: 'password'
       fill_in 'Confirm password', with: 'password'
-  # save_and_open_page
       click_button 'Create User'
 
       expect(page).to have_content("Email has already been taken")

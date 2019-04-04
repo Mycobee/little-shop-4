@@ -1,11 +1,59 @@
-.top-nav {
+.visitor-nav {
   padding-top: 40px;
   flex-direction: row;
   justify-content: space-around;
   width: 60%;
 }
 
-.top-nav a {
+.visitor-nav a {
+  color: gray;
+  text-decoration: none;
+  font-family: 'Muli', sans-serif;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  width: 50%;
+  font-size: 1.5rem;
+}
+.user-nav {
+  padding-top: 40px;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 60%;
+}
+
+.user-nav a {
+  color: gray;
+  text-decoration: none;
+  font-family: 'Muli', sans-serif;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  width: 50%;
+  font-size: 1.5rem;
+}
+.merchant-nav {
+  padding-top: 40px;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 60%;
+}
+
+.merchant-nav a {
+  color: gray;
+  text-decoration: none;
+  font-family: 'Muli', sans-serif;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  width: 50%;
+  font-size: 1.5rem;
+}
+.admin-nav {
+  padding-top: 40px;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 60%;
+}
+
+.admin-nav a {
   color: gray;
   text-decoration: none;
   font-family: 'Muli', sans-serif;
