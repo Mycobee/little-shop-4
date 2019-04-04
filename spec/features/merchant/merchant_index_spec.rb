@@ -13,7 +13,6 @@ RSpec.describe 'As a visitor viewing the merchants index' do
         
         it 'shows every merchant name, city, and address' do
             visit merchants_path 
-            save_and_open_page
             expect(page).to have_content("Name: #{@merchant_1.name}")
             expect(page).to have_content("Name: #{@merchant_2.name}")
             expect(page).to have_content("Name: #{@merchant_3.name}")
