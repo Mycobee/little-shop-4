@@ -1,7 +1,10 @@
 class SessionsController < ApplicationController
 
   def new
-
+    user = User.find_by(params[:email])
+    if user && user.role == 0
+      redirect_to profile_path(user)
+    end
   end
 
   def create
@@ -9,7 +12,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password]) && user.role == 0
       session[:user_id] = user.id
       flash[:notice] = "#{user.name} logged in."
-      redirect_to user_path(user)
+      redirect_to profile_path(user)
     elsif user && user.authenticate(params[:password]) && user.role == 1
       # binding.pry
       session[:user_id] = user.id

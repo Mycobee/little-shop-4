@@ -8,18 +8,33 @@ RSpec.describe 'Logged in redirect works correctly' do
 
       visit root_path
 
-      click_link "Login"
+      visit login_path
 
-      expect(current_path).to eq(login_path)
+      expect(current_path).to eq(profile_path(reg_user))
+    end
+  end
+  context 'As a regular user and I visit login path' do
+    it 'it redirects me to my profile page' do
 
-      fill_in "Email", with: "#{reg_user.email}"
-      fill_in "Password", with: "#{reg_user.password}"
+      reg_user = create(:user)
 
-      click_button "Log In"
+      visit root_path
 
       visit login_path
-      
+
       expect(current_path).to eq(profile_path(reg_user))
+    end
+  end
+  context 'As a merchant user and I visit login path' do
+    it 'it redirects me to my profile page' do
+
+      merch_user = create(:merchant)
+
+      visit root_path
+
+      visit login_path
+
+      expect(current_path).to eq(merchant_dashboard_path(merch_user))
     end
   end
 end

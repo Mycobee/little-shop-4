@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :cart, only:[:index] do
   end
 
-  resources :users, only:[:new, :create, :show] do
+  resources :users, only:[:new, :create] do
   end
 
 end
