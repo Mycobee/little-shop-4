@@ -7,13 +7,13 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new', as: :login
   post '/login', to: 'sessions#create'
 
+
   get '/logout', to: 'sessions#destroy'
   # get '/admin/users', to: 'admins#index'
-  #
+  # 
   # get '/admin/user', to: 'user#show'
   # resources :admin_users do
   #   resources :users, only: [:index, :show]
-  get '/cart', to: 'cart#show', as: :cart
 
   get '/profile', to: 'users#show', as: :profile
 
@@ -37,8 +37,8 @@ Rails.application.routes.draw do
   resources :merchants, only:[:index] do
   end
 
-  # resources :cart, only: [:show] do
-  # end
+  resources :cart, only:[:index] do
+  end
 
   resources :users, only:[:new, :create] do
   end
