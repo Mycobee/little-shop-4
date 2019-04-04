@@ -10,14 +10,14 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = "Account successfully created, Logged in as #{@user.name}"
-      redirect_to profile_path(@user)
+      redirect_to profile_path
     else
       render :new
     end
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
 

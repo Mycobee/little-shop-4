@@ -10,7 +10,7 @@ RSpec.describe 'As a registered user' do
       allow_any_instance_of(ApplicationController).to \
       receive(:current_user).and_return(@user)
 
-      visit profile_path(@user)
+      visit profile_path
 
       expect(page).to have_content(@user.name)
       expect(page).to have_content("Address: #{@user.address}")
