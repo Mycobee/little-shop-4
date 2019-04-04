@@ -5,6 +5,7 @@
   <li>
     <%= link_to user.name, admin_user_path(user) %>
     <%= user.created_at %>
+    <%= button_to "Upgrade to Merchant" %>
   </li>
   <% end %>
 </ul>

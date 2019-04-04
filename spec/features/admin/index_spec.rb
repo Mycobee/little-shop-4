@@ -79,12 +79,3 @@ RSpec.describe "As an admin user" do
     end
   end
 end
-
-# As an admin user
-# When I click a new "Users" link in the nav (only visible to admins)
-# Then my current URI route is "/admin/users"
-# Only admin users can reach this path.
-# I see all users in the system who are not merchants nor admins.
-# Each user's name is a link to a show page for that user ("/admin/users/5")
-# Next to each user's name is the date they registered
-# Next to each user's name is a button that says 'Upgrade to Merchant'
