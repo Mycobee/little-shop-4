@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   # resources :admin_users do
   #   resources :users, only: [:index, :show]
 
-  get '/profile/:id', to: 'users#show', as: :profile
+  get '/profile', to: 'users#show', as: :profile
 
   namespace :admin do
     resources :users, only: [:index, :show]
@@ -22,8 +22,14 @@ Rails.application.routes.draw do
   resources :items, only:[:index] do
   end
 
-  namespace :merchant do
-    resources :dashboard, only:[:show]
+  namespace :dashboard do
+    get '/', to: 'dashboard#show'
+    # resources :items, # TODO
+  end
+
+  namespace :admin do
+    get '/', to: 'dashboard#show', as: :dashboard
+    # resources :items, # TODO
   end
 
   resources :merchants, only:[:index, :show] do
@@ -32,7 +38,7 @@ Rails.application.routes.draw do
   resources :cart, only:[:index] do
   end
 
-  resources :users, only:[:new, :create, :show] do
+  resources :users, only:[:new, :create] do
   end
 
 end

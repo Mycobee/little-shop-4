@@ -10,7 +10,7 @@
 #
 #       visit new_user_path
 #
-#       expect(current_path).to eq(profile_path(reg_user))
+#       expect(current_path).to eq(profile_path)
 #     end
 #   end
 # end

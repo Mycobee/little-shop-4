@@ -8,8 +8,8 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :city
       t.string :state
       t.integer :zip_code
-      t.integer :role
-      t.boolean :enabled
+      t.integer :role, default: 0
+      t.boolean :enabled, default: true
 
       t.timestamps
     end

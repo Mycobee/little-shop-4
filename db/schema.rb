@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 20190401233104) do
     t.string "name"
     t.string "description"
     t.string "image_url", default: "https://emblemsbf.com/img/77148.jpg"
-    t.integer "quantity"
+    t.integer "quantity", default: 0
     t.float "base_price"
-    t.boolean "enabled"
+    t.boolean "enabled", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(version: 20190401233104) do
     t.string "city"
     t.string "state"
     t.integer "zip_code"
-    t.integer "role"
-    t.boolean "enabled"
+    t.integer "role", default: 0
+    t.boolean "enabled", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
