@@ -1,3 +1,10 @@
 <h1>Active Merchants</h1>
 
-<% binding.pry %>
+<% @active_merchants.each do |merchant| %>
+    <ul class='active_merchants_list'>
+        <li>Name: <%= merchant.name %></li>
+        <li>City: <%= merchant.city %></li>
+        <li>State: <%= merchant.state %></li>
+        <li>Registration Date: <%= merchant.created_at %></li>
+    </ul>
+<% end %>
