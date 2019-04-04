@@ -1,8 +1,6 @@
 class CartController < ApplicationController
 
-  def index
-
-
+  def show
+    @cart = Hash.new(0)
   end
-
 end
