@@ -7,10 +7,17 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new', as: :login
   post '/login', to: 'sessions#create'
 
-
-  # get '/merchant/dashboard/:id', to:'merchant/dashboard#show'
+  # get '/admin/users', to: 'admins#index'
+  # 
+  # get '/admin/user', to: 'user#show'
+  # resources :admin_users do
+  #   resources :users, only: [:index, :show]
 
   get '/profile/:id', to: 'users#show', as: :profile
+
+  namespace :admin do
+    resources :users, only: [:index, :show]
+  end
 
   resources :items, only:[:index] do
   end
@@ -29,3 +36,4 @@ Rails.application.routes.draw do
   end
 
 end
+  # get '/merchant/dashboard/:id', to:'merchant/dashboard#show'
