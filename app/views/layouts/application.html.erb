@@ -41,6 +41,7 @@
       <% elsif current_user.admin? %>
         <ul class="admin-nav">
           <%= link_to 'Dashboard', 'admin/dashboard' %>
+          <%= link_to 'Users', admin_users_path %>
           <%= link_to 'Log Out', '/logout' %>
           <p>Logged in as <%= current_user.name %></p>
         </ul>
