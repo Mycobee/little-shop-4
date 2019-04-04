@@ -11,13 +11,12 @@ RSpec.describe "login workflow" do
 
       expect(current_path).to eq(login_path)
 
-      fill_in "Email", with: "#{reg_user.email}"
-      fill_in "Password", with: "#{reg_user.password}"
+      fill_in "Email", with: reg_user.email
+      fill_in "Password", with: reg_user.password
 
-      # save_and_open_page
       click_button "Log In"
       expect(page).to have_content("Logged in as #{reg_user.name}")
-      expect(current_path).to eq(user_path(reg_user))
+      expect(current_path).to eq(profile_path)
     end
   end
 
@@ -37,7 +36,7 @@ RSpec.describe "login workflow" do
       # save_and_open_page
       click_button "Log In"
       expect(page).to have_content("Logged in as #{merch_user.name}")
-      expect(current_path).to eq(merchant_dashboard_path(merch_user))
+      expect(current_path).to eq(dashboard_path)
     end
   end
 
@@ -58,7 +57,7 @@ RSpec.describe "login workflow" do
       # save_and_open_page
       click_button "Log In"
       expect(page).to have_content("Logged in as #{admin_user.name}")
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(admin_dashboard_path)
     end
   end
 end
