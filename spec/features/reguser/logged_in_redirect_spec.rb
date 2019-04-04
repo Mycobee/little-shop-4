@@ -32,7 +32,7 @@ RSpec.describe 'Logged in redirect works correctly' do
 
       click_button "Log In"
 
-      expect(current_path).to eq(dashboard_path)
+      expect(current_path).to eq(merchant_dashboard_path)
       expect(page).to have_content("Logged in as #{merch_user.name}")
       expect(page).to_not have_link("Login")
       expect(page).to_not have_link("Register")
