@@ -45,6 +45,7 @@ RSpec.describe 'registration' do
 
     it 'should fail with pre existing email' do
       email = 'deonte@turing.io'
+      user = create(:user, email: email)
       visit root_path
 
       click_link 'Register'
@@ -62,25 +63,8 @@ RSpec.describe 'registration' do
 
       click_button 'Create User'
 
-        last_user = User.last
-
-      expect(current_path).to eq(profile_path)
-
-      click_link "Home"
-
-      click_link "Register"
-
-      fill_in 'Name', with: 'Deonte'
-      fill_in 'Email', with: email
-      fill_in 'Address', with: '189 E Belleview ln'
-      fill_in 'City', with: 'Denver'
-      fill_in 'State', with: 'CO'
-      fill_in 'Zip code', with: '80015'
-      fill_in 'Password', with: 'password'
-      fill_in 'Confirm password', with: 'password'
-      click_button 'Create User'
-
       expect(page).to have_content("Email has already been taken")
+      expect(page).to_not have_content(email)
     end
   end
 end
