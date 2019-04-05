@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   #   resources :users, only: [:index, :show]
 
   get '/profile', to: 'users#show', as: :profile
+  get '/cart', to: 'cart#show', as: :cart
 
   namespace :admin do
     resources :users, only: [:index, :show]
@@ -35,9 +36,6 @@ Rails.application.routes.draw do
   end
 
   resources :merchants, only:[:index] do
-  end
-
-  resources :cart, only:[:index] do
   end
 
   resources :users, only:[:new, :create] do
