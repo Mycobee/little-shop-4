@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   resources :merchants, only:[:index] do
   end
 
-  resources :cart, only:[:index] do
+  resources :cart, only: [:index, :show] do
   end
 
   resources :users, only:[:new, :create] do

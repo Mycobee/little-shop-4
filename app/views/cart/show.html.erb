@@ -4,4 +4,9 @@
 <p>
   else this text!
 </p>
+<% @cart.each do |key, value| %>
+<%= key.name %>
+<%= key.price %>
+<%= key.image_url %>
+<%= value %>
 <% end %>
