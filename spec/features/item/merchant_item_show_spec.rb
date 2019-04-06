@@ -25,7 +25,6 @@ RSpec.describe "As a merchant" do
 
       expect(current_path).to eq(dashboard_items_path)
 
-      binding.pry
     end
   end
 end
