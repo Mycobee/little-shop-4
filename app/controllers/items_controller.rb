@@ -2,7 +2,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all
-    @merchant_name = Item.joins(:user)
   end
 
   def show

@@ -1,12 +1,57 @@
-.visitor-nav {
-  padding-top: 40px;
+
+h1 {
+  font-family: 'Muli', sans-serif;
+  color: #58A0B7;
+  text-align: center;
+}
+
+
+h3 {
+  font-family: 'Muli', sans-serif;
+  text-decoration: none;
+  color: black;
+}
+
+#body_of_doc {
+   display: flex;
+   flex-direction: column;
+   background-color: #7058B7;
+ }
+.main-navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #58A0B7;
+  border: .35rem solid #5870B7;
+}
+.main-nav {
+  padding-top: 1rem;
+  padding-left: 1rem;
   flex-direction: row;
   justify-content: space-around;
-  width: 60%;
+  width: 40%;
+}
+
+.main-nav a {
+  color: #7058B7;
+  text-decoration: none;
+  font-family: 'Muli', sans-serif;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  width: 50%;
+  font-size: 1.5rem;
+}
+
+.visitor-nav {
+  padding-top: 1rem;
+  padding-right:  1rem;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 34.5%;
 }
 
 .visitor-nav a {
-  color: gray;
+  color: #7058B7;
   text-decoration: none;
   font-family: 'Muli', sans-serif;
   margin-left: 1rem;
@@ -15,14 +60,15 @@
   font-size: 1.5rem;
 }
 .user-nav {
-  padding-top: 40px;
+  padding-top: 1rem;
+  padding-right:  1rem;
   flex-direction: row;
   justify-content: space-around;
-  width: 60%;
+  width: 40%;
 }
 
 .user-nav a {
-  color: gray;
+  color: #7058B7;
   text-decoration: none;
   font-family: 'Muli', sans-serif;
   margin-left: 1rem;
@@ -31,14 +77,15 @@
   font-size: 1.5rem;
 }
 .merchant-nav {
-  padding-top: 40px;
+  padding-top: 1rem;
+  padding-right:  1rem;
   flex-direction: row;
   justify-content: space-around;
-  width: 60%;
+  width: 40%;
 }
 
 .merchant-nav a {
-  color: gray;
+  color: #7058B7;
   text-decoration: none;
   font-family: 'Muli', sans-serif;
   margin-left: 1rem;
@@ -47,14 +94,15 @@
   font-size: 1.5rem;
 }
 .admin-nav {
-  padding-top: 40px;
+  padding-top: 1rem;
+  padding-right:  1rem;
   flex-direction: row;
   justify-content: space-around;
-  width: 60%;
+  width: 40%;
 }
 
 .admin-nav a {
-  color: gray;
+  color: #7058B7;
   text-decoration: none;
   font-family: 'Muli', sans-serif;
   margin-left: 1rem;
@@ -63,12 +111,28 @@
   font-size: 1.5rem;
 }
 
-// .item-card {
-//   display: flex;
-//   width: 30%;
-//   border: 1px solid black;
-//   margin: 15px;
-// }
-// .image_tag {
-//   width: 100%;
-// }
+.index_container {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.index-card {
+  background-color: #58A0B7;
+  color: black;
+  text-decoration: none;
+  align-items: center;
+  font-family: 'Muli', sans-serif;
+  display: flex;
+  flex-flow: column;
+  width: 40%;
+  border: .35rem solid #5870B7;
+  margin: 1rem;
+}
+#img {
+  width: 30%;
+}
+
+#item_list {
+  list-style: none;
+  padding-left: 0px;
+}
