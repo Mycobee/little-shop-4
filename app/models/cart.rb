@@ -1,8 +1,8 @@
 class Cart
     attr_reader :items
 
-    def initialize
-        @items = Hash.new(0)
+    def initialize(initial_contents)
+        @items = initial_contents || {}
     end
 
     def add_item(item)
@@ -14,12 +14,12 @@ class Cart
     end
 
     def grand_total
-        total = 0
+        grand_total = 0
         
         @items.each do |item, quantity|
-            total += (item.base_price * quantity)
+            grand_total += (item.base_price * quantity)
         end
 
-        total 
+        grand_total 
     end
 end

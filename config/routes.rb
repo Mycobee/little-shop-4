@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   #   resources :users, only: [:index, :show]
 
   get '/profile', to: 'users#show', as: :profile
+  
   get '/cart', to: 'cart#show', as: :cart
+  post '/cart', to: 'cart#create'
 
   namespace :admin do
     resources :users, only: [:index, :show]

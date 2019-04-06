@@ -13,8 +13,6 @@ RSpec.describe Cart do
     end
     
     it '.add_item' do
-      
-
       expect(@cart.items.values.sum).to eq(4)
     end
 

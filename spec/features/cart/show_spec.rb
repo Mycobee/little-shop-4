@@ -3,11 +3,15 @@ require 'rails_helper'
 <<<<<<< HEAD
 RSpec.describe 'As a visitor or registered' do
   describe 'When I visit my empty cart' do
+<<<<<<< Updated upstream
 =======
 RSpec.describe 'As a visitor or registered user' do
   describe 'When I visit my cart without cart items' do
 >>>>>>> 91468f5af95e6adc3ea6f4351e62dc44604163ad
     it 'I see a message that my cart is empty' do
+=======
+    xit 'I see a message that my cart is empty' do
+>>>>>>> Stashed changes
 
       visit cart_path
 
@@ -16,7 +20,17 @@ RSpec.describe 'As a visitor or registered user' do
   end
 <<<<<<< HEAD
 
-  describe 'when I visit my cart with items' do
+  describe 'When I add items to my cart' do
+    it 'A message is displayed' do
+      item_1 = create(:item, base_price: 10)
+      item_2 = create(:item, base_price: 10)
+      item_3 = create(:item, base_price: 10)
+
+      visit items_path
+    end
+  end
+
+  describe 'when a user adds items to cart' do
     xit 'I add to cart and subtotal' do
       item_1 = create(:item, base_price: 10)
       item_2 = create(:item, base_price: 10)
