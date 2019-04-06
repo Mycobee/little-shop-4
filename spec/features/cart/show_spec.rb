@@ -13,7 +13,7 @@ require 'rails_helper'
 
   describe 'When I add items to my cart' do
     it 'A message is displayed' do
-      item_1 = create(:item, base_price: 10)
+      item_1 = create(:item)
 
       visit items_path
 
@@ -23,7 +23,7 @@ require 'rails_helper'
     end
 
     it "the message correctly increments for multiple items" do
-      item_1 = create(:item, base_price: 10)
+      item_1 = create(:item)
 
       visit items_path
 
@@ -34,6 +34,18 @@ require 'rails_helper'
       click_button "Add to Cart"
 
       expect(page).to have_content("You now have 2 units of #{item_1.name} in your cart.")
+    end
+
+    it 'the total number of items in the cart increments' do
+      item_1 = create(:item)
+
+      visit items_path
+      
+      expect(page).to have_content("Cart: 0")
+
+      click_button "Add to Cart"
+
+      expect(page).to have_content("Cart: 1")
     end
   end
 
