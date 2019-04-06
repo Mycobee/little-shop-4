@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'As an admin user' do
   describe 'I see the same links as a visitor' do
-    xit 'plus dashboard view, and logout link' do
-      
-      admin = User.create(name: "Admin 1", email:"admin123@admin.com", password_digest: "admin22", address: "213 admin st", city: "Adminsville", state: "Colorado", zip_code: 22657, role: 2, enabled: true)
+    it 'plus dashboard view, and logout link' do
+
+      admin =  create(:admin)
+      allow_any_instance_of(ApplicationController).to \
+      receive(:current_user).and_return(admin)
 
       visit root_path
 

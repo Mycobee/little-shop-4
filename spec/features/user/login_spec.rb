@@ -36,7 +36,7 @@ RSpec.describe "login workflow" do
       # save_and_open_page
       click_button "Log In"
       expect(page).to have_content("Logged in as #{merch_user.name}")
-      expect(current_path).to eq(dashboard_path)
+      expect(current_path).to eq(merchant_dashboard_path)
     end
   end
 

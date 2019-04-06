@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new', as: :login
   post '/login', to: 'sessions#create'
 
+
+  get '/logout', to: 'sessions#destroy'
   # get '/admin/users', to: 'admins#index'
   #
   # get '/admin/user', to: 'user#show'
@@ -22,8 +24,8 @@ Rails.application.routes.draw do
   resources :items, only:[:index, :show] do
   end
 
-  namespace :dashboard do
-    get '/', to: 'dashboard#show'
+  namespace :merchant do
+    get '/', to: 'dashboard#show', as: :dashboard
     # resources :items, # TODO
   end
 
@@ -32,7 +34,7 @@ Rails.application.routes.draw do
     # resources :items, # TODO
   end
 
-  resources :merchants, only:[:index, :show] do
+  resources :merchants, only:[:index] do
   end
 
   resources :cart, only:[:index] do
