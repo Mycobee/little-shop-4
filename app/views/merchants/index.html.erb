@@ -1,10 +1,13 @@
 <h1>Active Merchants</h1>
-
-<% @active_merchants.each do |merchant| %>
-    <ul class='active_merchants_list'>
-        <li>Name: <%= merchant.name %></li>
-        <li>City: <%= merchant.city %></li>
-        <li>State: <%= merchant.state %></li>
-        <li>Registration Date: <%= merchant.created_at %></li>
-    </ul>
-<% end %>
+<section class="index_container">
+  <% @active_merchants.each do |merchant| %>
+  <section class="index-card" >
+      <ul class='active_merchants_list'>
+          <li>Name: <%= merchant.name %></li>
+          <li>City: <%= merchant.city %></li>
+          <li>State: <%= merchant.state %></li>
+          <li>Registration Date: <%= merchant.created_at %></li>
+      </ul>
+  </section>
+  <% end %>
+</section>

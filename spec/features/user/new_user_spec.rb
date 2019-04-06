@@ -64,6 +64,7 @@ RSpec.describe 'registration' do
       click_button 'Create User'
 
       expect(page).to have_content("Email has already been taken")
+      expect(page).to_not have_content(email)
     end
   end
 end
