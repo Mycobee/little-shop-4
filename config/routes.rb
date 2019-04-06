@@ -16,9 +16,6 @@ Rails.application.routes.draw do
   #   resources :users, only: [:index, :show]
 
   get '/profile', to: 'users#show', as: :profile
-  
-  get '/cart', to: 'cart#show', as: :cart
-  post '/cart', to: 'cart#create'
 
   namespace :admin do
     resources :users, only: [:index, :show]
@@ -40,14 +37,10 @@ Rails.application.routes.draw do
   resources :merchants, only:[:index] do
   end
 
-<<<<<<< HEAD
-=======
-  resources :cart, only: [:index, :show] do
-  end
-
->>>>>>> 91468f5af95e6adc3ea6f4351e62dc44604163ad
   resources :users, only:[:new, :create] do
   end
+
+  resources :carts, only: [:create]
 
 end
   # get '/merchant/dashboard/:id', to:'merchant/dashboard#show'
