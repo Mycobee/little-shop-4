@@ -60,4 +60,20 @@ RSpec.describe "login workflow" do
       expect(current_path).to eq(admin_dashboard_path)
     end
   end
+  describe 'As a visitor' do
+    context 'when I visit /login, and I submit valid information' do
+      it 'I am redirected to a login page and see flash message for bad credentials' do
+        user = create(:user)
+
+        visit login_path
+
+        fill_in "Email", with: "#{user.email}"
+        fill_in "Password", with: "wrong password"
+        click_button "Log In"
+save_and_open_page
+        expect(current_path).to eq(login_path)
+        expect(page).to have_content("Your credentials were incorrect")
+      end
+    end
+  end
 end
