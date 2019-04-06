@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   get '/logout', to: 'sessions#destroy'
   # get '/admin/users', to: 'admins#index'
-  # 
+  #
   # get '/admin/user', to: 'user#show'
   # resources :admin_users do
   #   resources :users, only: [:index, :show]
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
   end
 
-  resources :items, only:[:index] do
+  resources :items, only:[:index, :show] do
   end
 
   namespace :merchant do
@@ -38,6 +38,12 @@ Rails.application.routes.draw do
   resources :merchants, only:[:index] do
   end
 
+<<<<<<< HEAD
+=======
+  resources :cart, only: [:index, :show] do
+  end
+
+>>>>>>> 91468f5af95e6adc3ea6f4351e62dc44604163ad
   resources :users, only:[:new, :create] do
   end
 
