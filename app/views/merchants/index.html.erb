@@ -23,7 +23,7 @@
   <section class="index-card" >
     <ul class='active_merchants_list'>
       <li>Name: <%= link_to merchant.name, admin_merchant_path(merchant) %>
-        <div class="merchant-activation-<% merchant.id %>">
+        <div class="merchant-activation-<%= merchant.id %>">
           <% if merchant.enabled == false%>
           <input type="submit" value= "Enable <%= merchant.name %> ?" />
           <% elsif merchant.enabled == true%>
