@@ -20,7 +20,7 @@
         <ul class="visitor-nav">
           <%= link_to 'Login', login_path %>
           <%= link_to 'Register', new_user_path %>
-          <%= link_to 'Shopping Cart', carts_path %>
+          <%= link_to 'Shopping Cart', cart_path(@cart) %>
           <p>Cart: <%= @cart.total_count %></p>
         </ul>
 
@@ -28,7 +28,7 @@
         <ul class="user-nav">
           <%= link_to 'Profile', '/profile' %>
           <%= link_to 'Log Out', '/logout' %>
-          <%= link_to 'Shopping Cart', carts_path %> 
+          <%= link_to 'Shopping Cart', cart_path(@cart) %> 
           <p>Cart: <%= @cart.total_count %></p>
           <p>Logged in as <%= current_user.name %></p>
         </ul>

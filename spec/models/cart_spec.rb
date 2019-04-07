@@ -2,21 +2,10 @@ require 'rails_helper'
 
  RSpec.describe Cart do
   describe 'instance methods' do
-#     before(:each) do
-#       @item_1 = create(:item, base_price: 6)
-#       @item_2 = create(:item, base_price: 6)
-#       @item_3 = create(:item, base_price: 6)
-#       @cart = Cart.new
-#       @cart.add_item(@item_1)
-#       @cart.add_item(@item_2)
-#       @cart.add_item(@item_3)
-#       @cart.add_item(@item_3)
-#     end
-    
     it "#total_count" do
       cart = Cart.new({
-        1 => 2,  # two copies of song 1
-        2 => 3   # three copies of song 2
+        1 => 2,  
+        2 => 3   
       })
       expect(cart.total_count).to eq(5)
     end
@@ -39,12 +28,30 @@ require 'rails_helper'
       expect(cart.count_of(5)).to eq(0)
     end
 
-#     it '.subtotal' do
-#         expect(@cart.subtotal(@item_3)).to eq(12)
-#     end
+    it "#item_display" do
+        cart = Cart.new({})
+        item_1 = create(:item, id: 10)
+        cart.add_item(item_1.id)
+  
+        expect(cart.item_display(item_1.id)).to eq(item_1)
+    end
 
-#     it '.grand_total' do
-#         expect(@cart.grand_total).to eq(24)
-#     end
+    it '#subtotal' do
+      cart = Cart.new({})
+      item_1 = create(:item, base_price: 10)
+      cart.add_item(item_1.id)
+      cart.add_item(item_1.id)
+      expect(cart.subtotal(item_1.id)).to eq("20.00")
+    end
+
+    it '.grand_total' do
+        cart = Cart.new({})
+        item_1 = create(:item, base_price: 10)
+        cart.add_item(item_1.id)
+        cart.add_item(item_1.id)
+        item_2 = create(:item, base_price: 10)
+        cart.add_item(item_2.id)
+        expect(cart.grand_total).to eq("30.00")
+    end
    end
  end

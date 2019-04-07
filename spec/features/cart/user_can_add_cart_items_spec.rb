@@ -1,53 +1,42 @@
 require 'rails_helper'
 
-# RSpec.describe 'As a visitor or registered' do
-#   describe 'When I visit my empty cart' do
-#     xit 'I see a message that my cart is empty' do
+RSpec.describe 'When I add items to my cart' do
+  it 'A message is displayed' do
+    item_1 = create(:item)
 
+    visit items_path
 
-#       visit cart_path
+    click_button "Add to Cart"
 
-#       expect(page).to have_content("My Cart is Empty")
-#     end
-#   end
-
-  describe 'When I add items to my cart' do
-    it 'A message is displayed' do
-      item_1 = create(:item)
-
-      visit items_path
-
-      click_button "Add to Cart"
-  
-      expect(page).to have_content("You now have 1 unit of #{item_1.name} in your cart.")
-    end
-
-    it "the message correctly increments for multiple items" do
-      item_1 = create(:item)
-
-      visit items_path
-
-      click_button "Add to Cart"
-
-      expect(page).to have_content("You now have 1 unit of #{item_1.name} in your cart.")
-
-      click_button "Add to Cart"
-
-      expect(page).to have_content("You now have 2 units of #{item_1.name} in your cart.")
-    end
-
-    it 'the total number of items in the cart increments' do
-      item_1 = create(:item)
-
-      visit items_path
-      
-      expect(page).to have_content("Cart: 0")
-
-      click_button "Add to Cart"
-
-      expect(page).to have_content("Cart: 1")
-    end
+    expect(page).to have_content("You now have 1 unit of #{item_1.name} in your cart.")
   end
+
+  it "the message correctly increments for multiple items" do
+    item_1 = create(:item)
+
+    visit items_path
+
+    click_button "Add to Cart"
+
+    expect(page).to have_content("You now have 1 unit of #{item_1.name} in your cart.")
+
+    click_button "Add to Cart"
+
+    expect(page).to have_content("You now have 2 units of #{item_1.name} in your cart.")
+  end
+
+  it 'the total number of items in the cart increments' do
+    item_1 = create(:item)
+
+    visit items_path
+    
+    expect(page).to have_content("Cart: 0")
+
+    click_button "Add to Cart"
+
+    expect(page).to have_content("Cart: 1")
+  end
+end
 
 
 
