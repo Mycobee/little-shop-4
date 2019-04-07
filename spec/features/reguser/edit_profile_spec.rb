@@ -25,32 +25,41 @@ RSpec.describe 'As a registered User' do
 
       visit edit_profile_path
 
-      expect(find_field('Name').value).to eq(user.name
-      expect(find_field('Address').value).to eq user.address
-      expect(find_field('City').value).to eq user.city
-      expect(find_field('State').value).to eq user.state
-      expect(find_field('Zip code').value).to eq user.zip_code
-      expect(find_field('Email').value).to eq user.email
-
-      # find_field('Name').should_have_content(user.name)
-      # find_field('Address').should_have_content(user.address)
-      # find_field('City').should_have_content(user.city)
-      # find_field('State').should_have_content(user.state)
-      # find_field('Zip code').should_have_content(user.zip_code)
-      # find_field('Email').should_have_content(user.email)
+      expect(page).to have_field("Name", placeholder: user.name)
+      expect(page).to have_field("Address", placeholder: user.address)
+      expect(page).to have_field("City", placeholder: user.city)
+      expect(page).to have_field("State", placeholder: user.state)
+      expect(page).to have_field("Zip code", placeholder: user.zip_code)
+      expect(page).to have_field("Email", placeholder: user.email)
       find_field('New password')
       find_field('Confirm password')
+      find_button('Update User')
+    end
+  end
+  describe 'I can change any or all of my information' do
+    it 'I click Update User, am redirected to profile page, and have updated profile flash message' do
+      user = create(:user)
+      allow_any_instance_of(ApplicationController).to \
+      receive(:current_user).and_return(user)
+
+      visit edit_profile_path
+
+      fill_in 'Email', with: "user_updated_email@gmail.com"
+      fill_in 'City', with: 'Portland'
+      fill_in 'Zip code', with: '21990'
+
+      click_button "Update User"
+
+      expect(current_path).to eq(profile_path)
+
+      expect(page).to have_content("Profile Information Updated")
+      expect(page).to have_content(user.name)
+      expect(page).to have_content("Address: #{user.address}")
+      expect(page).to have_content("City: Portland")
+      expect(page).to have_content("State: #{user.state}")
+      expect(page).to have_content("Zip Code: 21990")
+      expect(page).to have_content("Email: user_updated_email@gmail.com")
+      expect(page).to have_link("Edit Profile")
     end
   end
 end
-# expect(current_path).to eq(new_user_path)
-# fill_in 'Name', with: 'Deonte'
-# fill_in 'Address', with: '189 E Belleview ln'
-# fill_in 'City', with: 'Denver'
-# fill_in 'State', with: 'CO'
-# fill_in 'Zip code', with: '80015'
-# fill_in 'Email', with: email
-# fill_in 'Password', with: 'password'
-# fill_in 'Confirm password', with: 'password'
-#
-# click_button 'Create User'

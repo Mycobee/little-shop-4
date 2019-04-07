@@ -70,7 +70,7 @@ RSpec.describe "login workflow" do
         fill_in "Email", with: "#{user.email}"
         fill_in "Password", with: "wrong password"
         click_button "Log In"
-save_and_open_page
+
         expect(current_path).to eq(login_path)
         expect(page).to have_content("Your credentials were incorrect")
       end

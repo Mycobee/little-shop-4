@@ -1,7 +1,7 @@
 <h1>Edit Your Profile</h1>
 
 
-<%= form_for edit_profile_path(@user) do |f| %>
+<%= form_for @user, url: update_profile_path do |f| %>
 
 <p><%= f.label :name %></p>
 <p><%= f.text_field :name, :placeholder => @user.name %></p>
@@ -16,7 +16,7 @@
 <p><%= f.text_field :state, :placeholder => @user.state %></p>
 
 <p><%= f.label :zip_code %></p>
-<p><%= f.text_field :zip_code, :placeholder => @user.zip_code %></p>
+<p><%= f.text_field :zip_code, :placeholder => "#{@user.zip_code}" %></p>
 
 <p><%= f.label :email %></p>
 <p><%= f.text_field :email, :placeholder => @user.email %></p>
@@ -27,5 +27,5 @@
 <p><%= f.label :confirm_password %></p>
 <p><%= f.password_field :confirm_password %></p>
 
-<p><%= f.submit %></p>
+<p><%= f.submit "Update User" %></p>
 <% end %>
