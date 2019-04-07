@@ -28,9 +28,15 @@ RSpec.describe 'As an admin' do
 
     it 'I should see a link to upgrade the users account to become a merchant' do
       visit admin_user_path(@user)
-      
-      expect(page).to have_link("upgrade")
+      #
+      # save_and_open_page
 
+      click_link("Upgrade to Merchant")
+
+      save_and_open_page
+
+      expect(current_path).to eq(admin_merchant_path(@user))
+      expect(@user.role).to eq("merchant")
 
     end
   end
