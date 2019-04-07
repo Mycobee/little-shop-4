@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'As a visitor or registered user' do
   describe 'When I visit my cart without cart items' do
-  xit 'I see a message that my cart is empty' do
+
+    xit 'I see a message that my cart is empty' do
+
 
       visit cart_path
 

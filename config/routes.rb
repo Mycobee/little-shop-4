@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: [:index, :show]
+    resources :merchants, only: [:show]
   end
 
   resources :items, only:[:index, :show] do
@@ -28,8 +29,14 @@ Rails.application.routes.draw do
 
   namespace :merchant do
     get '/', to: 'dashboard#show', as: :dashboard
-    # resources :items, # TODO
   end
+
+  namespace :dashboard do
+    resources :items, only:[:index]
+  end
+  # scope module: 'dashboard', as: 'dashboard' do
+  #   resources :items, only:[:index]
+  # end
 
   namespace :admin do
     get '/', to: 'dashboard#show', as: :dashboard
