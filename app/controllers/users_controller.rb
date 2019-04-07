@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   end
 
   def update
+
     @user = current_user
     @user.update(user_params)
     flash[:notice] = "Profile Information Updated"
