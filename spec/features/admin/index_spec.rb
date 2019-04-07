@@ -78,4 +78,24 @@ RSpec.describe "As an admin user" do
       expect(page).to have_button("Upgrade to Merchant")
     end
   end
+  describe "When I visit the merchant index page" do
+    describe "And click on the disable button" do
+      xit 'There is a flash message saying merchant account disabled, and merchant cannot log in' do
+        admin = create(:admin)
+        allow_any_instance_of(ApplicationController).to \
+        receive(:current_user).and_return(admin)
+
+        merchant = create(:merchant)
+
+        visit admin_merchant_path
+
+        find_button('Disable').click
+        click_button('Disable')
+
+        expect(current_path).to eq(admin_merchants_path)
+        expect(page).to have_content("Merchant account has been disabled")
+        expect(merchant.role).to eq(0)
+      end
+    end
+  end
 end
