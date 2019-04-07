@@ -46,11 +46,10 @@ Rails.application.routes.draw do
   resources :merchants, only:[:index] do
   end
 
-  resources :cart, only: [:index, :show] do
-  end
-
   resources :users, only:[:new, :create] do
   end
+
+  resources :carts, only: [:create, :show]
 
 end
   # get '/merchant/dashboard/:id', to:'merchant/dashboard#show'

@@ -7,4 +7,8 @@ class Item < ApplicationRecord
   validates_presence_of :image_url
   validates_presence_of :quantity
   validates_presence_of :base_price
+
+  def merchant_name
+   user.name
+  end
 end

@@ -1,0 +1,20 @@
+<% if @cart.items.empty? %>
+<h1>My Cart is Empty</h1>
+<% else %>
+
+  <% @cart.items.each do |id, quant| %>
+  <ul>
+    <li>Name: <%= @cart.item_display(id).name %></li>
+    <li>Price: <%= @cart.item_display(id).base_price %></li>
+    <li>Desired Quantity: <%= quant %></li>
+    <li>Subtotal: $<%= @cart.subtotal(id) %></li>
+    <li>Merchant: <%= @cart.item_display(id).merchant_name %></li>
+    <br>
+  </ul>
+  <img height="200" width="150" src="<%= @cart.item_display(id).image_url %>" alt="Item Thumbnail">
+  <% end %>
+
+  <h3>Total Price: $<%= @cart.grand_total %></h3>
+  <%= link_to "Empty Cart", cart_path(@cart) %>
+<% end %>
+
