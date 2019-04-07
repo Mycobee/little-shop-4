@@ -25,9 +25,9 @@
       <li>Name: <%= link_to merchant.name, admin_merchant_path(merchant) %>
         <div class="merchant-activation-<%= merchant.id %>">
           <% if merchant.enabled == false%>
-          <input type="submit" value= "Enable <%= merchant.name %> ?" />
+          <input type="submit" value= "Enable" />
           <% elsif merchant.enabled == true%>
-          <input type="submit" value= "Disable <%= merchant.name %> ?" />
+          <input type="submit" value= "Disable" />
           <% end %>
         </div>
       </li>

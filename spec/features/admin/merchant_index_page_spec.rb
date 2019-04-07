@@ -1,7 +1,7 @@
 RSpec.describe 'Admin visits a merchants index page, clicks and sees merchant' do
   context 'As an Admin' do
 
-    it 'visits the index page of merchants' do
+    it 'visits the index page of merchants and disables a merchant' do
 
       merchant_1 = create(:merchant)
       merchant_2 = create(:inactive_merchant)
@@ -14,11 +14,18 @@ RSpec.describe 'Admin visits a merchants index page, clicks and sees merchant' d
 
       visit merchants_path
 
-      save_and_open_page
 
-      expect(page).to have_button("Disable")
-      expect(page).to have_button("Enable")
+      within(".merchant-activation-#{merchant_1.id}") do
+        expect(page).to have_button("Disable")
+      end
 
+      within(".merchant-activation-#{merchant_2.id}") do
+        expect(page).to have_button("Enable")
+      end
+
+      within(".merchant-activation-#{merchant_3.id}") do
+        expect(page).to have_button("Disable")
+      end
     end
   end
 end
