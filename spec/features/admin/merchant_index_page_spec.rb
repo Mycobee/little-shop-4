@@ -14,14 +14,17 @@ RSpec.describe 'Admin visits a merchants index page, clicks and sees merchant' d
 
       visit merchants_path
 
-      click_link merchant_2.name
+      save_and_open_page
 
-      
-      expect(page).to have_content("Disable #{merchant_1.name}?")
-      expect(page).to have_button("Enable #{merchant_2.name}?")
-
-
-
+      within ".merchant-activation #{merchant_1.id}" do
+        expect(page).to have_button("Disable #{merchant_1.name}?")
+      end
+      within ".merchant-activation #{merchant_2.id}" do
+        expect(page).to have_button("Enable #{merchant_1.name}?")
+      end
+      within ".merchant-activation #{merchant_3.id}" do
+        expect(page).to have_button("Disable #{merchant_1.name}?")
+      end
     end
   end
 end

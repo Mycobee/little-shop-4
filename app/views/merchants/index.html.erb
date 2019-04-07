@@ -1,18 +1,41 @@
+<% if current_user.nil? || current_user.admin? == false%>
 <h1>Active Merchants</h1>
 <section class="index_container">
   <% @active_merchants.each do |merchant| %>
 
+
   <section class="index-card" >
       <ul class='active_merchants_list'>
-          <% if current_user.admin? %>
-          <li>Name: <%= link_to merchant.name, admin_merchant_path(merchant) %></li>
-          <% elsif %>
-          <li>Name: <%= link_to merchant.name, merchant_dashboard_path %></li>
-          <% end %>
-          <li>City: <%= merchant.city %></li>
-          <li>State: <%= merchant.state %></li>
-          <li>Registration Date: <%= merchant.created_at %></li>
+        <li>Name: <%= link_to merchant.name, merchant_dashboard_path %></li>
+        <li>City: <%= merchant.city %></li>
+        <li>State: <%= merchant.state %></li>
+        <li>Registration Date: <%= merchant.created_at %></li>
       </ul>
   </section>
   <% end %>
 </section>
+
+<% elsif current_user.admin? == true %>
+<h1>All Merchants</h1>
+<section class="index_container">
+  <% @all_merchants.each do |merchant| %>
+
+  <section class="index-card" >
+    <ul class='active_merchants_list'>
+      <li>Name: <%= link_to merchant.name, admin_merchant_path(merchant) %>
+        <div class="merchant-activation-<% merchant.id %>">
+          <% if merchant.enabled == false%>
+          <input type="submit" value= "Enable <%= merchant.name %> ?" />
+          <% elsif merchant.enabled == true%>
+          <input type="submit" value= "Disable <%= merchant.name %> ?" />
+          <% end %>
+        </div>
+      </li>
+      <li>City: <%= merchant.city %></li>
+      <li>State: <%= merchant.state %></li>
+      <li>Registration Date: <%= merchant.created_at %></li>
+    </ul>
+  </section>
+  <% end %>
+</section>
+<% end %>

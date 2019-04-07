@@ -8,14 +8,14 @@ RSpec.describe 'As a visitor viewing the merchants index' do
             @merchant_2 =  create(:merchant)
             @merchant_3 =  create(:merchant)
             @merchant_4 = create(:inactive_merchant)
-
-            allow_any_instance_of(ApplicationController).to \
-            receive(:current_user).and_return(@admin)
         end
 
 
+
         it 'shows every merchant name, city, and address' do
+
             visit merchants_path
+            save_and_open_page
             expect(page).to have_content("Name: #{@merchant_1.name}")
             expect(page).to have_content("Name: #{@merchant_2.name}")
             expect(page).to have_content("Name: #{@merchant_3.name}")
@@ -31,6 +31,8 @@ RSpec.describe 'As a visitor viewing the merchants index' do
             expect(page).to have_content("Registration Date: #{@merchant_1.created_at}")
             expect(page).to have_content("Registration Date: #{@merchant_2.created_at}")
             expect(page).to have_content("Registration Date: #{@merchant_3.created_at}")
+
+            save_and_open_page
 
             expect(page).to_not have_content(@merchant_4.name)
 
