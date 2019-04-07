@@ -1,0 +1,23 @@
+
+<h1><%= @user.name %> Profile</h1>
+<%= "Welcome, #{@user.name}" %>
+<ul>
+  <li>
+    <p>Address: <%= @user.address %></p>
+  </li>
+  <li>
+    <p>City: <%= @user.city %></p>
+  </li>
+  <li>
+    <p>State: <%= @user.state %></p>
+  </li>
+  <li>
+    <p>Zip Code: <%= @user.zip_code %></p>
+  </li>
+  <li>
+    <p>Email: <%= @user.email %></p>
+  </li>
+  <li>
+    <p><%= link_to "Edit Profile", '/profile/edit' %></p>
+  </li>
+ </ul>

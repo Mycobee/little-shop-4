@@ -1,9 +1,14 @@
 <h1>Active Merchants</h1>
 <section class="index_container">
   <% @active_merchants.each do |merchant| %>
+
   <section class="index-card" >
       <ul class='active_merchants_list'>
+          <% if current_user.admin? %>
+          <li>Name: <%= link_to merchant.name, admin_merchant_path(merchant) %></li>
+          <% elsif %>
           <li>Name: <%= link_to merchant.name, merchant_dashboard_path %></li>
+          <% end %>
           <li>City: <%= merchant.city %></li>
           <li>State: <%= merchant.state %></li>
           <li>Registration Date: <%= merchant.created_at %></li>
