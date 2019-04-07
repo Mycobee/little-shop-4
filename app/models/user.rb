@@ -4,8 +4,8 @@ class User < ApplicationRecord
   has_many :items
 
   validates_presence_of :name
-  validates :email, uniqueness: true, presence: true
-  validates_presence_of :password, require: true
+  validates :email, uniqueness: true, presence: true, on: :create
+  validates_presence_of :password, require: true, on: :create
   validates_presence_of :address
   validates_presence_of :city
   validates_presence_of :state
