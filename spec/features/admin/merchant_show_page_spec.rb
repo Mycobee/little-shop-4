@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe 'Admin visits a merchants index page, clicks and sees merchant' do
   context 'As an Admin' do
 
