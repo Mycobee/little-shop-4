@@ -10,7 +10,7 @@ RSpec.describe 'As a visitor or registered user' do
     end
   end
   describe 'When I visit my cart' do
-    xit 'I see all items in my cart' do
+    xit 'I see all items in my cart and a link to empty my cart' do
       item_1 = create(:item)
       item_2 = create(:item)
       item_3 = create(:item)
@@ -26,20 +26,26 @@ RSpec.describe 'As a visitor or registered user' do
       visit cart_path
 
       expect(page).to have_content(item_1.name)
-      expect(page).to have_content(item_2.name)
-      expect(page).to have_content(item_3.name)
-
-      expect(page).to have_content(item_1.price)
-      expect(page).to have_content(item_2.price)
-      expect(page).to have_content(item_3.price)
-
       expect(page).to have_css("img[src*='#{item_1.image_url}']")
-      expect(page).to have_css("img[src*='#{item_2.image_url}']")
-      expect(page).to have_css("img[src*='#{item_3.image_url}']")
-
+      expect(page).to have_content(item_1.merchant)
+      expect(page).to have_content(item_1.base_price)
       expect(page).to have_content("Desired Quantity: #{cart[:item_1]}")
+      expect(page).to have_content(item_1.base_price * cart[:item_1])
+
+      expect(page).to have_content(item_2.name)
+      expect(page).to have_css("img[src*='#{item_2.image_url}']")
+      expect(page).to have_content(item_2.merchant)
+      expect(page).to have_content(item_2.base_price)
       expect(page).to have_content("Desired Quantity: #{cart[:item_2]}")
+      expect(subtotal).to eq(item_2.base_price * desired_quantity)
+
+      expect(page).to have_content(item_3.name)
+      expect(page).to have_css("img[src*='#{item_3.image_url}']")
+      expect(page).to have_content(item_3.merchant)
+      expect(page).to have_content(item_3.base_price)
       expect(page).to have_content("Desired Quantity: #{cart[:item_3]}")
+      expect(subtotal).to eq(item_3.base_price * desired_quantity)
+
     end
   end
 end
