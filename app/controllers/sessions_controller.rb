@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "#{user.name} logged in."
       redirect_user
     else
-      @error = ["Wrong credentials, please try again."]
+      flash[:notice] = "Your credentials were incorrect"
       render :new
     end
   end

@@ -1,0 +1,31 @@
+<h1>Edit Your Profile</h1>
+
+
+<%= form_for @user, url: update_profile_path do |f| %>
+
+<p><%= f.label :name %></p>
+<p><%= f.text_field :name, :placeholder => @user.name %></p>
+
+<p><%= f.label :address %></p>
+<p><%= f.text_field :address, :placeholder => @user.address %></p>
+
+<p><%= f.label :city %></p>
+<p><%= f.text_field :city, :placeholder => @user.city %></p>
+
+<p><%= f.label :state %></p>
+<p><%= f.text_field :state, :placeholder => @user.state %></p>
+
+<p><%= f.label :zip_code %></p>
+<p><%= f.text_field :zip_code, :placeholder => "#{@user.zip_code}" %></p>
+
+<p><%= f.label :email %></p>
+<p><%= f.text_field :email, :placeholder => @user.email %></p>
+
+<p><%= f.label :new_password %></p>
+<p><%= f.password_field :new_password %></p>
+
+<p><%= f.label :confirm_password %></p>
+<p><%= f.password_field :confirm_password %></p>
+
+<p><%= f.submit "Update User" %></p>
+<% end %>
