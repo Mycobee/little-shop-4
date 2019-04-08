@@ -24,7 +24,16 @@ RSpec.describe 'As a visitor' do
 
       visit items_path
 
-      expect(page).to have_content("You must register or login to finish checking out.")
+      expect(page).to have_content("You must login or register to finish checking out.")
+
+      click_on 'login'
+      expect(current_path).to eq(login_path)
+
+      visit items_path
+
+      click_on 'register'
+      expect(current_path).to eq(new_user_path)
+
     end
   end
 end
