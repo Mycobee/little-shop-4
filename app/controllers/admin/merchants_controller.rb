@@ -14,7 +14,7 @@ class Admin::MerchantsController < ApplicationController
     flash[:notice] = "Merchant account has been disabled"
     redirect_to merchants_path
   end
-  
+
   def update
     @user = User.find(params[:id])
     if @user.role == "default" && current_admin? == true
