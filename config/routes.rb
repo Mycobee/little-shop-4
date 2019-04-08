@@ -52,6 +52,5 @@ Rails.application.routes.draw do
   end
 
   resources :carts, only: [:create, :show]
-
 end
   # get '/merchant/dashboard/:id', to:'merchant/dashboard#show'
