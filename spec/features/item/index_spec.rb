@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe "As a visitor" do
   describe "when visit items" do
     before :each do
-      @merch_1 = create(:user, role: "merchant", id: 1)
-      @merch_2 = create(:user, role: "merchant", id: 2)
-      @merch_3 = create(:user, role: "merchant", id: 3)
-      @merch_4 = create(:user, role: "merchant", id: 4)
+      @merch_1 = create(:user, role: "merchant")
+      @merch_2 = create(:user, role: "merchant")
+      @merch_3 = create(:user, role: "merchant")
+      @merch_4 = create(:user, role: "merchant")
       @item_1 = @merch_1.items.create(name:"Item 1", description: "cool", quantity: 50, base_price: 3.0 )
       @item_2 = @merch_2.items.create(name:"Item 2", description: "wow", quantity: 23, base_price: 35.50 )
       @item_3 = @merch_1.items.create(name:"Item 3", description: "fooly", quantity: 10, base_price: 3.65 )

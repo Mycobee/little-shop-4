@@ -40,5 +40,22 @@ RSpec.describe Item, type: :model do
 
       expect(@item_1.avg_f_time).to include("1 day 10:16")
     end
+
+    it ".fulfilled?" do
+      @user = create(:user)
+      @merch = create(:user, role: "merchant")
+      @item_1 = @merch.items.create(name:"Item 1", description: "cool", quantity: 50, base_price: 3.0 )
+      @item_3 = @merch.items.create(name:"Item 3", description: "cool", quantity: 50, base_price: 3.0 )
+      @item_2 = @merch.items.create(name:"Item 2", description: "get lost", quantity: 0, base_price: 3.0, enabled: false  )
+      @order_1 = create(:order, status: "shipped_order", user: @user)
+      @order_2 = create(:order, status: "shipped_order", user: @user)
+      @order_3 = create(:order, status: "shipped_order", user: @user)
+      @order_4 = create(:order, status: "shipped_order", user: @user)
+
+      @order_item_1 = create(:order_item, order: @order_1, item: @item_1, fulfilled: true, created_at: 1.hour.ago, updated_at: 30.minutes.ago)
+
+      expect(@item_1.fulfilled?).to eq(true)
+      expect(@item_2.fulfilled?).to eq(false)
+    end
   end
 end
