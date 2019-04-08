@@ -1,6 +1,9 @@
+
+<p><%= "Welcome, #{current_user.name}" %></p>
+
 <h1><%= @user.name %> Profile</h1>
 
-<%= "Welcome, #{@user.name}" %>
+<h2><%= link_to "Upgrade to Merchant", admin_merchant_path(@user), :method=> :put %></h2>
 <ul>
   <li>
     <p>Address: <%= @user.address %></p>
