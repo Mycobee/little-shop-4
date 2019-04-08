@@ -18,4 +18,12 @@ class Item < ApplicationRecord
     .group(:id)
     .pluck("avg(order_items.updated_at - order_items.created_at) as avg_f_time").first
   end
+
+  def fulfilled?
+    if order_items.empty?
+      false
+    elsif (self.id == (order_items.first.item_id) && (order_items.first.fulfilled == true))
+      true
+    end
+  end
 end

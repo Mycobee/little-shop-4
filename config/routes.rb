@@ -23,6 +23,10 @@ Rails.application.routes.draw do
 
   post '/merchant/enable', to: 'admin/merchants#enable', as: :enable_merchant_status
 
+  post '/item/disable', to: 'dashboard/items#disable', as: :disable_item_status
+
+  post '/item/enable', to: 'dashboard/items#enable', as: :enable_item_status
+
   namespace :admin do
     resources :users, only: [:index, :show]
     resources :merchants, only: [:show, :index, :update]
@@ -36,7 +40,7 @@ Rails.application.routes.draw do
   end
 
   namespace :dashboard do
-    resources :items, only:[:index]
+    resources :items, only:[:index, :new, :edit]
     resources :orders, only: [:show]
   end
   # scope module: 'dashboard', as: 'dashboard' do

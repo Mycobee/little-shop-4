@@ -4,18 +4,23 @@
 
 <section class="index_container">
   <% @user.items.each do |item| %>
-
   <section class="index-card">
-    <li>ID: <%= item.id %></li>
-    <li><%= item.name %></li>
-    <li><%= image_tag(item.image_url) %></li>
-    <li>My Price: $<%= item.base_price %></li>
-    <li>Amount I Have: <%= item.quantity %></li>
-    <% if item.enabled == false %>
-    <li><%= button_to "Enable", change_item_status_path(item_id: item.id) %></li>
-    <% else %>
-    <li><%= button_to "Disable", change_item_status_path(item_id: item.id) %></li>
-    <% end %>
+    <div class="item<%= item.id %>">
+      <li>ID: <%= item.id %></li>
+      <li><%= item.name %></li>
+      <li><%= image_tag(item.image_url) %></li>
+      <li>My Price: $<%= item.base_price %></li>
+      <li>Amount I Have: <%= item.quantity %></li>
+      <li><%= button_to "Edit",  edit_dashboard_item_path(item) %></li>
+      <% if item.enabled == false %>
+      <li><%= button_to "Enable", enable_item_status_path(item_id: item.id) %></li>
+      <% else %>
+      <li><%= button_to "Disable", disable_item_status_path(item_id: item.id) %></li>
+      <% end %>
+      <% if item.fulfilled? == false %>
+      <%= link_to "Delete Item", dashboard_items_path, method: :delete, data: { confirm: "Are you sure?"} %>
+      <% end %>
+    </div>
   </section>
   <% end %>
 </section>

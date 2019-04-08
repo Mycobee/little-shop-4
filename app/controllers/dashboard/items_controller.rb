@@ -4,7 +4,6 @@ class Dashboard::ItemsController < Dashboard::BaseController
   end
 
   def disable
-    binding.pry
     @item = Item.find(params[:item_id])
     @item.enabled = false
     @item.save
@@ -16,7 +15,7 @@ class Dashboard::ItemsController < Dashboard::BaseController
     @item = Item.find(params[:item_id])
     @item.enabled = true
     @item.save
-    flash[:notice] = "Item account has been enabled"
+    flash[:notice] = "Item has been enabled"
     redirect_to dashboard_items_path
   end
 end
