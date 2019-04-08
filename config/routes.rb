@@ -19,9 +19,11 @@ Rails.application.routes.draw do
   get '/profile/edit', to: 'users#edit', as: :edit_profile
   patch '/profile', to: 'users#update', as: :update_profile
 
+  post '/merchant/change', to: 'admin/merchants#change', as: :change_merchant_status
+
   namespace :admin do
     resources :users, only: [:index, :show]
-    resources :merchants, only: [:show]
+    resources :merchants, only: [:show, :index]
   end
 
   resources :items, only:[:index, :show] do
@@ -43,7 +45,7 @@ Rails.application.routes.draw do
     # resources :items, # TODO
   end
 
-  resources :merchants, only:[:index] do
+  resources :merchants, only: [:index, :edit, :update] do
   end
 
   resources :cart, only: [:index, :show] do
