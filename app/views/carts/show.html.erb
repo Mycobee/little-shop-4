@@ -15,6 +15,5 @@
   <% end %>
 
   <h3>Total Price: $<%= @cart.grand_total %></h3>
-  <%= link_to "Empty Cart", cart_path(@cart) %>
+  <%= link_to "Empty Cart", cart_path(@cart), :method=> :put %>
 <% end %>
-

@@ -13,4 +13,9 @@ class CartsController < ApplicationController
   def show
 
   end
+
+  def update
+    session[:cart] = nil
+    redirect_to cart_path
+  end
 end
