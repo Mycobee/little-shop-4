@@ -86,16 +86,19 @@ RSpec.describe "As an admin user" do
         allow_any_instance_of(ApplicationController).to \
         receive(:current_user).and_return(admin)
 
+        merchant_2 = create(:merchant)
         merchant = create(:merchant)
 
-        visit admin_merchant_path
+        visit merchants_path
 
-        find_button('Disable').click
-        click_button('Disable')
-
-        expect(current_path).to eq(admin_merchants_path)
+        within(".merchant-activation-#{merchant.id}") do
+          click_button('Disable')
+        end
+        expect(current_path).to eq(merchants_path)
+        within(".merchant-activation-#{merchant.id}") do
+          expect(page).to_not have_button("Disable")
+        end
         expect(page).to have_content("Merchant account has been disabled")
-        expect(merchant.role).to eq(0)
       end
     end
   end

@@ -27,7 +27,7 @@
           <% if merchant.enabled == false%>
           <input type="submit" value= "Enable" />
           <% elsif merchant.enabled == true%>
-          <input type="submit" value= "Disable" />
+          <li><%= button_to "Disable", change_merchant_status_path(merchant_id: merchant.id) %></li>
           <% end %>
         </div>
       </li>
