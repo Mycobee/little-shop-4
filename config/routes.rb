@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   get '/profile/edit', to: 'users#edit', as: :edit_profile
   patch '/profile', to: 'users#update', as: :update_profile
 
-  post '/merchant/change', to: 'admin/merchants#change', as: :change_merchant_status
+  post '/merchant/disable', to: 'admin/merchants#disable', as: :disable_merchant_status
+
+  post '/merchant/enable', to: 'admin/merchants#enable', as: :enable_merchant_status
 
   namespace :admin do
     resources :users, only: [:index, :show]
@@ -34,7 +36,8 @@ Rails.application.routes.draw do
   end
 
   namespace :dashboard do
-    resources :items, only:[:index, :new]
+    resources :items, only:[:index]
+    resources :orders, only: [:show]
   end
   # scope module: 'dashboard', as: 'dashboard' do
   #   resources :items, only:[:index]

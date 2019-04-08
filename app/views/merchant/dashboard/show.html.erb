@@ -1,5 +1,6 @@
 
 <h1><%= @user.name %> Profile</h1>
+
 <%= "Welcome, #{@user.name}" %>
 <ul>
   <li>
@@ -17,11 +18,20 @@
   <li>
     <p>Email: <%= @user.email %></p>
   </li>
-  <li>
-    <p><%= link_to "Edit Profile", '/profile/edit' %></p>
-  </li>
-  <li>
-    <p><%= link_to "Merchant Items Page", dashboard_items_path %></p>
-  </li>
-
  </ul>
+ <% @user.orders.each do |order| %>
+  <ul>
+   <li>Order Id: <%= link_to order.id, dashboard_order_path(order) %></li>
+   <li>Date Created: <%= order.created_at %></li>
+   <li>Item Count: <%= order.total_items %></li>
+   <li>Total Value: <%= order.total_value %></li>
+   <% end %>
+  </ul>
+  <ul>
+    <li>
+      <p><%= link_to "Edit Profile", '/profile/edit' %></p>
+    </li>
+    <li>
+      <p><%= link_to "Merchant Items Page", dashboard_items_path %></p>
+    </li>
+  </ul>

@@ -61,5 +61,26 @@ RSpec.describe 'As a registered User' do
       expect(page).to have_content("Email: user_updated_email@gmail.com")
       expect(page).to have_link("Edit Profile")
     end
+
+    it 'doesnt allow me to change my email if taken already' do
+      user = create(:user)
+      user_2 = create(:user)
+
+      visit login_path
+
+      fill_in "Email", with: user.email
+      fill_in "Password", with: user.password
+
+      click_button "Log In"
+
+
+      visit edit_profile_path
+
+      fill_in 'Email', with: "#{user_2.email}"
+
+      click_button "Update User"
+
+      expect(user.email).to_not eq(user_2.email)
+    end
   end
 end

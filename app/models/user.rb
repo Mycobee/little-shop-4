@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :items
 
   validates_presence_of :name
-  validates :email, uniqueness: true, presence: true, on: :create
+  validates :email, uniqueness: true, presence: true
   validates_presence_of :password, require: true, on: :create
   validates_presence_of :address
   validates_presence_of :city
@@ -12,4 +12,8 @@ class User < ApplicationRecord
   validates_presence_of :zip_code
 
   enum role: [:default, :merchant, :admin]
+
+  def orders
+    Order.joins(:items).where("items.user_id = ?", self.id).uniq
+  end
 end
