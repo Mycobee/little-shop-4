@@ -11,4 +11,11 @@ class Item < ApplicationRecord
   def merchant_name
    user.name
   end
+
+  def avg_f_time
+    Item.joins(:order_items)
+    .where(id: self.id)
+    .group(:id)
+    .pluck("avg(order_items.updated_at - order_items.created_at) as avg_f_time").first
+  end
 end
