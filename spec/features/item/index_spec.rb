@@ -22,7 +22,7 @@ RSpec.describe "As a visitor" do
 
     it "should see all items and info" do
       expect(current_path).to eq(items_path)
-      expect(page).to have_content("Items Cataloge")
+      expect(page).to have_content("Items Catalogue")
       expect(page).to have_css("img[src*='#{@item_1.image_url}']")
       expect(page).to have_link(@item_1.name)
       expect(page).to have_content(@item_1.user.name)
