@@ -33,10 +33,11 @@ RSpec.describe 'As an admin' do
 
       click_link("Upgrade to Merchant")
 
-      save_and_open_page
-
-      expect(current_path).to eq(admin_merchant_path(@user))
+      expect(page).to have_content("#{@user.name} is now a merchant.")
+      @user = User.find(@user.id)
       expect(@user.role).to eq("merchant")
+      expect(current_path).to eq(admin_merchant_path(@user))
+
 
     end
   end

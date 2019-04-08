@@ -3,8 +3,7 @@
 
 <h1><%= @user.name %> Profile</h1>
 
-<h2><%= link_to "Upgrade to Merchant", admin_merchant_path(@user) %></h2>
-
+<h2><%= link_to "Upgrade to Merchant", admin_merchant_path(@user), :method=> :put %></h2>
 <ul>
   <li>
     <p>Address: <%= @user.address %></p>
