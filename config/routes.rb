@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     resources :items, only:[:index]
+    resources :orders, only: [:show]
   end
   # scope module: 'dashboard', as: 'dashboard' do
   #   resources :items, only:[:index]

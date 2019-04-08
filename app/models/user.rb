@@ -12,4 +12,8 @@ class User < ApplicationRecord
   validates_presence_of :zip_code
 
   enum role: [:default, :merchant, :admin]
+
+  def orders
+    Order.joins(:items).where("items.user_id = ?", self.id).uniq
+  end
 end
