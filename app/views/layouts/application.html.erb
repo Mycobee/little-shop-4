@@ -28,7 +28,7 @@
         <ul class="user-nav">
           <%= link_to 'Profile', '/profile' %>
           <%= link_to 'Log Out', '/logout' %>
-          <%= link_to 'Shopping Cart', cart_path(@cart) %> 
+          <%= link_to 'Shopping Cart', cart_path(@cart) %>
           <p>Cart: <%= @cart.total_count %></p>
           <p>Logged in as <%= current_user.name %></p>
         </ul>
@@ -50,7 +50,7 @@
       <% end %>
     </div>
     <% flash.each do |type, message| %>
-      <%= message %>
+      <%= sanitize(message) %>
     <% end %>
     <%= yield %>
   </body>

@@ -7,7 +7,7 @@ class Admin::MerchantsController < ApplicationController
     end
   end
 
-  def change
+  def disable
     @merchant = User.find(params[:merchant_id])
     @merchant.enabled = false
     @merchant.save
@@ -15,6 +15,14 @@ class Admin::MerchantsController < ApplicationController
     redirect_to merchants_path
   end
 
+  def enable
+    @merchant = User.find(params[:merchant_id])
+    @merchant.enabled = true
+    @merchant.save
+    flash[:notice] = "Merchant account has been enabled"
+    redirect_to merchants_path
+  end
+  
   def update
     @user = User.find(params[:id])
     if @user.role == "default" && current_admin? == true

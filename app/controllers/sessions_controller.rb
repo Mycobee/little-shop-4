@@ -6,17 +6,23 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      flash[:notice] = "#{user.name} logged in."
-      redirect_user
-    else
-      flash[:notice] = "Your credentials were incorrect"
-      render :new
+    if user.enabled == true
+      if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+        flash[:notice] = "#{user.name} logged in."
+        redirect_user
+      else
+        flash[:notice] = "Your credentials were incorrect"
+        render :new
+      end
+    else 
+      flash[:notice] = "Access Denied"
+        render :new
     end
   end
 
   def destroy
+    session[:cart] = nil
     session[:user_id] = nil
     redirect_to root_path
     flash[:notice] = "You are logged out"
