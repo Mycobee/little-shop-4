@@ -1,0 +1,11 @@
+<h1><%= @item.name %></h1>
+
+  <section class="item-info">
+    <%= image_tag(@item.image_url)%>
+    <li>Description: <%= @item.description %></li>
+    <li>Merchant: <%= @item.merchant_name %></li>
+    <li>Amount: <%= @item.quantity %></li>
+    <li>Price: $<%= @item.base_price %></li>
+    <li>Average Fulfillment Time: <%= @item.avg_f_time  %></li>
+    <%= button_to "Add to Cart", carts_path(item_id: @item.id) %>
+  </section>
