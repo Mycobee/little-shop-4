@@ -27,8 +27,10 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     @user.update(user_params)
-    flash[:notice] = "Profile Information Updated"
-    redirect_to profile_path
+    if @user.save
+      flash[:notice] = "Profile Information Updated."
+      redirect_to profile_path
+    end
   end
 
 # name: params[:name], address: params[:address], city: params[:city], zip_code: params[:zip_code], email: params[:email], password: params[:]
