@@ -1,17 +1,21 @@
 <h1>Items Cataloge</h1>
+
 <section class="index_container">
   <% @items.each do |item| %>
   <section class="index-card" >
-    <% if item.enabled == true %>
-    <h3><%= link_to item.name, item_path(item) %></h3>
-    <%= link_to image_tag(item.image_url), item_path(item), class: "image#{item.id}", id: "img"%>
-    <ul id="item_list">
-      <li><%= item.user.name %></li>
-      <li><%= item.description %></li>
-      <li><%= item.quantity %></li>
-      <li>$<%= item.base_price %></li>
-    </ul>
-    <% end %>
+    <div id="<%=item.id%>">
+      <% if item.enabled == true %>
+      <h3><%= link_to item.name, item_path(item) %></h3>
+      <%= link_to image_tag(item.image_url), item_path(item), class: "image#{item.id}", id: "img"%>
+      <ul id="item_list">
+        <li><%= item.user.name %></li>
+        <li><%= item.description %></li>
+        <li><%= item.quantity %></li>
+        <li>$<%= item.base_price %></li>
+      </ul>
+      <%= button_to "Add to Cart", carts_path(item_id: item.id) %>
+      <% end %>
+    </div>
   </section>
   <% end %>
 </section>

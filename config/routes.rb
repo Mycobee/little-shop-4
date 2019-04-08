@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: [:index, :show]
-    resources :merchants, only: [:show, :index]
+    resources :merchants, only: [:show, :index, :update]
   end
 
   resources :items, only:[:index, :show] do
@@ -48,11 +48,10 @@ Rails.application.routes.draw do
   resources :merchants, only: [:index, :edit, :update] do
   end
 
-  resources :cart, only: [:index, :show] do
-  end
-
   resources :users, only:[:new, :create] do
   end
+
+  resources :carts, only: [:create, :show]
 
 end
   # get '/merchant/dashboard/:id', to:'merchant/dashboard#show'

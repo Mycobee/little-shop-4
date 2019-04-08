@@ -12,7 +12,7 @@ RSpec.describe 'As an admin' do
 
     end
 
-    it 'should see same information as user except edit button' do
+    it 'I should see same information as user except edit button' do
 
       visit admin_user_path(@user)
 
@@ -23,6 +23,21 @@ RSpec.describe 'As an admin' do
       expect(page).to have_content("Zip Code: #{@user.zip_code}")
       expect(page).to have_content("Email: #{@user.email}")
       expect(page).to_not have_link("Edit Profile")
+
+    end
+
+    it 'I should see a link to upgrade the users account to become a merchant' do
+      visit admin_user_path(@user)
+      #
+      # save_and_open_page
+
+      click_link("Upgrade to Merchant")
+
+      expect(page).to have_content("#{@user.name} is now a merchant.")
+      @user = User.find(@user.id)
+      expect(@user.role).to eq("merchant")
+      expect(current_path).to eq(admin_merchant_path(@user))
+
 
     end
   end
