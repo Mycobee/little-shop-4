@@ -1,0 +1,21 @@
+<div class="new_item">
+  <%= link_to "Add Item", new_dashboard_item_path %>
+</div>
+
+<section class="index_container">
+  <% @user.items.each do |item| %>
+
+  <section class="index-card">
+    <li>ID: <%= item.id %></li>
+    <li><%= item.name %></li>
+    <li><%= image_tag(item.image_url) %></li>
+    <li>My Price: $<%= item.base_price %></li>
+    <li>Amount I Have: <%= item.quantity %></li>
+    <% if item.enabled == false %>
+    <li><%= button_to "Enable", change_item_status_path(item_id: item.id) %></li>
+    <% else %>
+    <li><%= button_to "Disable", change_item_status_path(item_id: item.id) %></li>
+    <% end %>
+  </section>
+  <% end %>
+</section>
