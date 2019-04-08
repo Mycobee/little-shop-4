@@ -17,6 +17,8 @@ RSpec.describe "As a visitor" do
       @order_item_4 = create(:order_item, order: @order_4, item: @item_1,  fulfilled: true, created_at: 14.hour.ago, updated_at: 25.minutes.ago)
 
       visit item_path(@item_1)
+
+
     end
 
     it "should display item info" do
@@ -29,6 +31,17 @@ RSpec.describe "As a visitor" do
       expect(page).to have_content("Price: $#{@item_1.base_price}")
       expect(page).to have_content("Average Fulfillment Time: #{@item_1.avg_f_time}")
       expect(page).to have_button("Add to Cart")
+    end
+
+    it "If I clicked on an item to add to cart it will add to cart and say it adds to cart" do
+      expect(page).to have_button("Add to Cart")
+
+      click_button "Add to Cart"
+
+      expect(current_path).to eq(items_path)
+
+      expect(page).to have_content("You now have 1 unit of Item 1 in your cart.")
+
     end
   end
 end
