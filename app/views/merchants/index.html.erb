@@ -24,10 +24,10 @@
     <ul class='active_merchants_list'>
       <li>Name: <%= link_to merchant.name, admin_merchant_path(merchant) %>
         <div class="merchant-activation-<%= merchant.id %>">
-          <% if merchant.enabled == false%>
-          <input type="submit" value= "Enable" />
-          <% elsif merchant.enabled == true%>
-          <li><%= button_to "Disable", change_merchant_status_path(merchant_id: merchant.id) %></li>
+          <% if merchant.enabled == false %>
+            <li><%= button_to "Enable", enable_merchant_status_path(merchant_id: merchant.id) %></li>
+          <% elsif merchant.enabled == true %>
+            <li><%= button_to "Disable", disable_merchant_status_path(merchant_id: merchant.id) %></li>
           <% end %>
         </div>
       </li>

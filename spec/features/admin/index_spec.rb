@@ -28,6 +28,7 @@ RSpec.describe "As an admin user" do
       expect(page).to_not have_content(merchant_2.name)
       expect(page).to_not have_content(merchant_3.name)
     end
+    
     it 'each user name is a link to show page for that user' do
       admin = create(:admin)
       allow_any_instance_of(ApplicationController).to \
@@ -45,6 +46,7 @@ RSpec.describe "As an admin user" do
 
       expect(current_path).to eq(admin_user_path(user_1))
     end
+    
     it "Should show the date each user registered" do
       admin = create(:admin)
       allow_any_instance_of(ApplicationController).to \
@@ -62,6 +64,7 @@ RSpec.describe "As an admin user" do
       expect(page).to have_content(user_2.created_at)
       expect(page).to have_content(user_3.created_at)
     end
+    
     it 'shows a button to upgrade to merchant' do
       admin = create(:admin)
       allow_any_instance_of(ApplicationController).to \
@@ -78,26 +81,78 @@ RSpec.describe "As an admin user" do
       expect(page).to have_button("Upgrade to Merchant")
     end
   end
+  
   describe "When I visit the merchant index page" do
     describe "And click on the disable button" do
-      it 'There is a flash message saying merchant account disabled, and merchant cannot log in' do
+      it 'There is a flash message saying merchant account disabled' do
         admin = create(:admin)
         allow_any_instance_of(ApplicationController).to \
         receive(:current_user).and_return(admin)
 
-        merchant_2 = create(:merchant)
         merchant = create(:merchant)
 
         visit merchants_path
-
+        
         within(".merchant-activation-#{merchant.id}") do
           click_button('Disable')
         end
+        
         expect(current_path).to eq(merchants_path)
         within(".merchant-activation-#{merchant.id}") do
           expect(page).to_not have_button("Disable")
         end
         expect(page).to have_content("Merchant account has been disabled")
+        
+        merchant = User.where(id: "#{merchant.id}").first
+       
+        expect(merchant.enabled?).to eq(false)
+      end
+
+      it 'and a disabled merchant account can not log in' do
+        merchant = create(:merchant, enabled: false)
+        visit login_path
+        fill_in "Email", with: merchant.email
+        fill_in "Password", with: merchant.password
+
+        click_button "Log In"
+        expect(page).to have_content("Access Denied")
+      end
+    end
+
+    describe 'and click on the enable button' do
+      it 'There is a flash message saying the merchant account is enabled' do
+        admin = create(:admin)
+        allow_any_instance_of(ApplicationController).to \
+        receive(:current_user).and_return(admin)
+
+        merchant = create(:merchant, enabled: false)
+
+        visit merchants_path
+
+  
+        within(".merchant-activation-#{merchant.id}") do
+          click_button('Enable')
+        end        
+        
+        expect(current_path).to eq(merchants_path)
+        within(".merchant-activation-#{merchant.id}") do
+          expect(page).to_not have_button("Enable")
+        end
+        expect(page).to have_content("Merchant account has been enabled")
+        
+        merchant = User.where(id: "#{merchant.id}").first
+       
+        expect(merchant.enabled?).to eq(true)
+      end
+
+      it 'and an enabled merchant account can log in' do
+        merchant = create(:merchant, enabled: true)
+        visit login_path
+        fill_in "Email", with: merchant.email
+        fill_in "Password", with: merchant.password
+
+        click_button "Log In"
+        expect(current_path).to eq(merchant_dashboard_path)
       end
     end
   end
