@@ -7,11 +7,24 @@
     <li>Name: <%= @cart.item_display(id).name %></li>
     <li>Price: <%= @cart.item_display(id).base_price %></li>
     <li>Desired Quantity: <%= quant %></li>
+    <div class="quantity-count-<%= @cart.item_display(id).id %>">
+      <%= form_for @cart.item_display(id), url: item_path(@cart.item_display(id)) do |f| %>
+      <p><%= f.label :quantity %>
+      <%= f.number_field :quantity %></p>
+      <br>
+      <%= f.submit "Change Quantity" %>
+      <br>
+      <% end %>
+    </div>
     <li>Subtotal: $<%= @cart.subtotal(id) %></li>
     <li>Merchant: <%= @cart.item_display(id).merchant_name %></li>
     <br>
   </ul>
   <img height="200" width="150" src="<%= @cart.item_display(id).image_url %>" alt="Item Thumbnail">
+  <br>
+  <div id="remove-<%= @cart.item_display(id).id %>">
+    <%= button_to "Remove From Cart", item_path(@cart.item_display(id)), :method=> :delete %>
+  </div>
   <% end %>
 
   <h3>Total Price: $<%= @cart.grand_total %></h3>

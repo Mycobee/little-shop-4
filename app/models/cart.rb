@@ -1,4 +1,6 @@
 class Cart
+
+
     attr_reader :items
 
     def initialize(initial_contents)
@@ -37,5 +39,13 @@ class Cart
         end
 
         "%5.2f" %grand_total
+    end
+
+    def delete_item(delete_item)
+      self.items.each do |item|
+        if item[0].to_i == delete_item.id
+          self.items.delete(delete_item.id.to_s)
+        end
+      end
     end
 end
