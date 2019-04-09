@@ -12,4 +12,9 @@ class User < ApplicationRecord
   validates_presence_of :zip_code
 
   enum role: [:default, :merchant, :admin]
+
+  def item_disable
+    Item.where(user_id: id)
+        .update_all(enabled: false)
+  end
 end

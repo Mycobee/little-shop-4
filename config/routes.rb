@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   post '/merchant/enable', to: 'admin/merchants#enable', as: :enable_merchant_status
 
   namespace :admin do
-    resources :users, only: [:index, :show]
+    resources :users, only: [:index, :show, :update]
     resources :merchants, only: [:show, :index, :update]
   end
 
