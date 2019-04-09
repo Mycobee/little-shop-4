@@ -79,4 +79,18 @@ RSpec.describe "As a visitor" do
       expect(current_path).to eq(item_path(@item_2))
     end
   end
+  # describe 'When I visit items index page' do
+  #   it "There is an area for statistics, 5 most popular and 5 least popular" do
+  #
+  #
+  #   end
+  # end
 end
+
+# As any kind of user on the system
+# When I visit the items index page ("/items")
+# I see an area with statistics:
+# - the top 5 most popular items by quantity purchased, plus the quantity bought
+# - the bottom 5 least popular items, plus the quantity bought
+#
+# "Popularity" is determined by total quantity of that item fulfilled
