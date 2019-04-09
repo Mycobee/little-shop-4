@@ -1,8 +1,8 @@
-<h1>Items Cataloge</h1>
+<h1>Items Catalogue</h1>
 
-<section class="index_container"></section>
-  <%  @items.each do |item| %>
-  <section class="index-card" >
+<section class="index_container">
+  <% @items.each do |item| %>
+  <section class="index-card">
     <div id="<%=item.id%>">
       <% if item.enabled == true %>
       <h3><%= link_to item.name, item_path(item) %></h3>

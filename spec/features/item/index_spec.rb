@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe "As a visitor" do
   describe "when visit items" do
     before :each do
-      @merch_1 = create(:user, role: "merchant", id: 1)
-      @merch_2 = create(:user, role: "merchant", id: 2)
-      @merch_3 = create(:user, role: "merchant", id: 3)
-      @merch_4 = create(:user, role: "merchant", id: 4)
+      @merch_1 = create(:user, role: "merchant")
+      @merch_2 = create(:user, role: "merchant")
+      @merch_3 = create(:user, role: "merchant")
+      @merch_4 = create(:user, role: "merchant")
       @item_1 = @merch_1.items.create(name:"Item 1", description: "cool", quantity: 50, base_price: 3.0 )
       @item_2 = @merch_2.items.create(name:"Item 2", description: "wow", quantity: 23, base_price: 35.50 )
       @item_3 = @merch_1.items.create(name:"Item 3", description: "fooly", quantity: 10, base_price: 3.65 )
@@ -22,7 +22,7 @@ RSpec.describe "As a visitor" do
 
     it "should see all items and info" do
       expect(current_path).to eq(items_path)
-      expect(page).to have_content("Items Cataloge")
+      expect(page).to have_content("Items Catalogue")
       expect(page).to have_css("img[src*='#{@item_1.image_url}']")
       expect(page).to have_link(@item_1.name)
       expect(page).to have_content(@item_1.user.name)
@@ -79,4 +79,18 @@ RSpec.describe "As a visitor" do
       expect(current_path).to eq(item_path(@item_2))
     end
   end
+  # describe 'When I visit items index page' do
+  #   it "There is an area for statistics, 5 most popular and 5 least popular" do
+  #
+  #
+  #   end
+  # end
 end
+
+# As any kind of user on the system
+# When I visit the items index page ("/items")
+# I see an area with statistics:
+# - the top 5 most popular items by quantity purchased, plus the quantity bought
+# - the bottom 5 least popular items, plus the quantity bought
+#
+# "Popularity" is determined by total quantity of that item fulfilled

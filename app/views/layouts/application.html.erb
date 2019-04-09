@@ -50,7 +50,7 @@
       <% end %>
     </div>
     <% flash.each do |type, message| %>
-      <%= message %>
+      <%= sanitize(message) %>
     <% end %>
     <%= yield %>
   </body>

@@ -28,10 +28,12 @@ class Admin::MerchantsController < ApplicationController
   end
   
   def update
+    binding.pry
     @user = User.find(params[:id])
     if @user.role == "default" && current_admin? == true
       @user.role = "merchant"
       if @user.save
+        require 'pry'; binding.pry
         flash[:notice] = "#{@user.name} is now a merchant."
         redirect_to admin_merchant_path(@user)
       else

@@ -10,10 +10,11 @@ class Admin::UsersController < ApplicationController
 
   def update
     @merchant = User.find(params[:id])
+    binding.pry
     if @merchant.role == "merchant" && current_admin? == true
       @merchant.role = 0
+      @merchant.item_disable
       if @merchant.save
-        @merchant.item_disable
         flash[:notice] = "#{@merchant.name} is now a user."
         redirect_to admin_merchant_path(@merchant)
       else

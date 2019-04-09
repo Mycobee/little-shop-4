@@ -45,14 +45,13 @@ RSpec.describe 'As an admin' do
      expect(item_1.enabled).to eq(false)
      expect(item_2.enabled).to eq(false)
      expect(item_3.enabled).to eq(false)
-      save_and_open_page
+     
      visit items_path
-      save_and_open_page
+    
      expect(page).to_not have_content(item_1.name)
      expect(page).to_not have_content(item_2.name)
      expect(page).to_not have_content(item_3.name)
      expect(page).to have_content(item_4.name)
-     save_and_open_page
     end
   end
 end

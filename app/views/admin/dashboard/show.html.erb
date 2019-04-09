@@ -1,0 +1,13 @@
+<% @orders.each do |order| %>
+<ul>
+  <li>
+    <%=link_to order.user.name, admin_user_path(order.user) %>
+  </li>
+  <li>
+    <%= order.id %>
+  </li>
+  <li>
+    <%= order.created_at %>
+  </li>
+</ul>
+<% end %>
