@@ -1,0 +1,18 @@
+
+<% @order_items.uniq.each do |item| %>
+
+<ul class="item-<%= item.id %>">
+  <li>
+    <%= link_to item.name, item_path(item) %>
+  </li>
+  <li>
+    <%= image_tag item.image_url %>
+  </li>
+  <li>
+    <%= item.base_price %>
+  </li>
+  <li>
+    <%= item.order_items.item_quantity %>
+  </li>
+</ul>
+<% end %>
