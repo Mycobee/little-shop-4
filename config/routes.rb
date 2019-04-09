@@ -22,8 +22,6 @@ Rails.application.routes.draw do
   post '/merchant/disable', to: 'admin/merchants#disable', as: :disable_merchant_status
   post '/merchant/enable', to: 'admin/merchants#enable', as: :enable_merchant_status
 
-  # patch '/item/update', to: 'item#update', as: :item_update
-
   namespace :admin do
     resources :users, only: [:index, :show]
     resources :merchants, only: [:show, :index, :update]
