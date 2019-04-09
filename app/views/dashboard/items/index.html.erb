@@ -18,7 +18,7 @@
       <li><%= button_to "Disable", disable_item_status_path(item_id: item.id) %></li>
       <% end %>
       <% if item.fulfilled? == false %>
-      <%= link_to "Delete Item", dashboard_items_path, method: :delete, data: { confirm: "Are you sure?"} %>
+      <%= link_to "Delete Item", dashboard_item_path(item), method: :delete, data: { confirm: "Are you sure?"} %>
       <% end %>
     </div>
   </section>

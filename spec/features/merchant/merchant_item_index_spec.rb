@@ -70,5 +70,11 @@ RSpec.describe 'Merchant Item index page' do
         expect(page).to_not have_content("Delete Item")
       end
     end
+
+    it "should delete item and return to item index" do
+      click_on "Delete Item"
+
+      expect(page).to_not have_content(@item_2.id)
+    end
   end
 end
