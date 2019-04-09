@@ -57,5 +57,35 @@ RSpec.describe Item, type: :model do
       expect(@item_1.fulfilled?).to eq(true)
       expect(@item_2.fulfilled?).to eq(false)
     end
+    xit ".top_five" do
+      user = create(:user)
+      merchant = create(:merchant)
+      item_1 = create(:item)
+      item_2 = create(:item)
+      item_3 = create(:item)
+      item_4 = create(:item)
+      item_5 = create(:item)
+      item_6 = create(:item)
+      item_7 = create(:item)
+      item_8 = create(:item)
+      item_9 = create(:item)
+      item_10 = create(:item)
+      item_11 = create(:item)
+      item_12 = create(:item)
+      item_13 = create(:item)
+      item_14 = create(:item)
+      item_15 = create(:item)
+
+      merchant.items << [item_1, item_2, item_3, item_4, item_5, item_6, item_7, item_8, item_9, item_10, item_11, item_12, item_13, item_14, item_15]
+
+      expect(@items.top_five).to eq("baluga whale")
+    end
   end
 end
+# As any kind of user on the system
+# When I visit the items index page ("/items")
+# I see an area with statistics:
+# - the top 5 most popular items by quantity purchased, plus the quantity bought
+# - the bottom 5 least popular items, plus the quantity bought
+#
+# "Popularity" is determined by total quantity of that item fulfilled

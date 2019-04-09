@@ -99,5 +99,74 @@ RSpec.describe 'Merchant Show page shows profile information' do
 
         expect(current_path).to eq(dashboard_order_path(order_1))
       end
+      describe "When I visit an order show page from dashboard" do
+        it "I see customer name, address, and only items that are being purchased from my inventory" do
+          merchant = create(:merchant)
+          allow_any_instance_of(ApplicationController).to \
+          receive(:current_user).and_return(merchant)
+
+          order = create(:order)
+
+          item_1 = create(:item, user: merchant)
+          item_2 = create(:item, user: merchant)
+          item_3 = create(:item, user: merchant)
+          item_4 = create(:item)
+          item_5 = create(:item)
+
+          order_item_1 = create(:order_item, item: item_1, order: order, quantity: 5)
+          order_item_2 = create(:order_item, item: item_1, order: order, quantity: 5)
+          order_item_3 = create(:order_item, item: item_2, order: order, quantity: 3)
+          order_item_4 = create(:order_item, item: item_2, order: order, quantity: 3)
+          order_item_5 = create(:order_item, item: item_3, order: order, quantity: 7)
+          order_item_6 = create(:order_item, item: item_3, order: order, quantity: 7)
+          order_item_4 = create(:order_item, item: item_4, order: order, quantity: 9)
+          order_item_5 = create(:order_item, item: item_5, order: order, quantity: 6)
+
+
+          visit merchant_dashboard_path
+
+          click_on "#{order.id}"
+
+          expect(current_path).to eq(dashboard_order_path(order))
+
+          within(".item-#{item_1.id}") do
+          expect(page).to have_link(item_1.name)
+          expect(page).to have_content(item_1.base_price)
+          expect(page).to have_css("img[src*='#{item_1.image_url}']")
+          expect(page).to have_content(10)
+          end
+
+          within(".item-#{item_2.id}") do
+          expect(page).to have_link(item_2.name)
+          expect(page).to have_content(item_2.base_price)
+          expect(page).to have_css("img[src*='#{item_2.image_url}']")
+          expect(page).to have_content(6)
+          end
+
+          within(".item-#{item_3.id}") do
+          expect(page).to have_link(item_3.name)
+          expect(page).to have_content(item_3.base_price)
+          expect(page).to have_css("img[src*='#{item_3.image_url}']")
+          expect(page).to have_content(14)
+          end
+
+          expect(page).to_not have_css("img[src*='#{item_4.image_url}']")
+          expect(page).to_not have_css("img[src*='#{item_5.image_url}']")
+          expect(page).to_not have_content(item_4.image_url)
+          expect(page).to_not have_content(item_5.image_url)
+          expect(page).to_not have_link(item_4.name)
+          expect(page).to_not have_link(item_5.name)
+        end
+      end
     end
   end
+  # As a merchant
+  # When I visit an order show page from my dashboard
+  # I see the customer's name and address
+  # I only the items in the order that are being purchased from my inventory
+  # I do not see any items in the order being purchased from other merchants
+  # For each item, I see the following information:
+  # - the name of the item, which is a link to my item's show page
+  # - a small thumbnail of the item
+  # - my price for the item
+  # - the quantity the user wants to purchase
