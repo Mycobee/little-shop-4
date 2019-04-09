@@ -18,4 +18,10 @@ class Dashboard::ItemsController < Dashboard::BaseController
     flash[:notice] = "Item has been enabled"
     redirect_to dashboard_items_path
   end
+
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy
+    redirect_to dashboard_items_path
+  end
 end
