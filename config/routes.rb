@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     resources :merchants, only: [:show, :index, :update]
   end
 
-  resources :items, only:[:index, :show] do
+  resources :items, only:[:index, :show, :update, :destroy] do
   end
 
   namespace :merchant do

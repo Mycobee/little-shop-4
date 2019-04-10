@@ -4,18 +4,18 @@ require 'rails_helper'
   describe 'instance methods' do
     it "#total_count" do
       cart = Cart.new({
-        1 => 2,  
-        2 => 3   
+        1 => 2,
+        2 => 3
       })
       expect(cart.total_count).to eq(5)
     end
-#     
+#
     it '#add_item' do
       cart = Cart.new({
-        '1' => 2,  
-        '2' => 3   
+        '1' => 2,
+        '2' => 3
       })
-      
+
       cart.add_item(1)
       cart.add_item(2)
 
@@ -32,7 +32,7 @@ require 'rails_helper'
         cart = Cart.new({})
         item_1 = create(:item, id: 10)
         cart.add_item(item_1.id)
-  
+
         expect(cart.item_display(item_1.id)).to eq(item_1)
     end
 
@@ -52,6 +52,13 @@ require 'rails_helper'
         item_2 = create(:item, base_price: 10)
         cart.add_item(item_2.id)
         expect(cart.grand_total).to eq("30.00")
+    end
+
+    it '.delete_item' do
+      cart = Cart.new({})
+      item_1 = create(:item, base_price: 10)
+      cart.add_item(item_1.id)
+      expect(cart.delete_item(item_1)).to eq({})
     end
    end
  end
