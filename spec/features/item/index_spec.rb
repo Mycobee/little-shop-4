@@ -145,8 +145,6 @@ RSpec.describe "As a visitor" do
       expect(page).to have_content(fulfilled_order_item_11.quantity)
       end
 
-  save_and_open_page
-
       within(".bottom-five-#{item_5.id}") do
       expect(page).to have_content(item_5.name)
       expect(page).to have_content(fulfilled_order_item_1.quantity)
