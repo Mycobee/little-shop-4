@@ -12,25 +12,15 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item = Item.find(params[:id])
-    @item.update(updated_params)
-    if @item.save!
-      flash[:notice] = "Cart Has Been Updated."
-      if @item.quantity == 0
-        @cart.delete_item(@item)
-      end
-      redirect_to cart_path(@cart)
-    end
+    @cart.update(params)
+    flash[:notice] = "Cart Has Been Updated."
+    redirect_to cart_path(@cart)
   end
 
   def destroy
-    @item = Item.find(params[:id])
-    @item.quantity = 0
     @cart.delete_item(@item)
-    if @item.save!
-      flash[:notice] = "Item Has Been deleted."
-      redirect_to cart_path(@cart)
-    end
+    flash[:notice] = "Item Has Been deleted."
+    redirect_to cart_path(@cart)
   end
 
 

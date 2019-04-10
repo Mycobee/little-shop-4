@@ -32,13 +32,17 @@ class Cart
 
     def grand_total
 
+
          grand_total = 0
 
         @items.each do |id, quantity|
             grand_total += (item_display(id).base_price * quantity)
         end
-
         "%5.2f" %grand_total
+    end
+
+    def update(updated_item)
+      self.items[updated_item[:id].to_s] = updated_item[:item][:quantity].to_f
     end
 
     def delete_item(delete_item)
