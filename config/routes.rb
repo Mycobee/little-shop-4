@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   end
 
   namespace :dashboard do
-    resources :items, only:[:index, :new, :edit, :destroy]
+    resources :items, only:[:index, :new, :edit, :destroy, :create]
     resources :orders, only: [:show]
   end
   # scope module: 'dashboard', as: 'dashboard' do

@@ -3,6 +3,25 @@ class Dashboard::ItemsController < Dashboard::BaseController
     @user = current_user
   end
 
+  def new
+    @user = current_user
+    @item = @user.items.new
+  end
+
+  def create
+    @user = current_user
+    @item = @user.items.new(item_params)
+    if @item.save
+      if @item.image_url == ""
+        @item.image_url = "https://emblemsbf.com/img/77148.jpg"
+      end
+      flash[:notice] = "#{@item.name} was created"
+      redirect_to dashboard_items_path
+    else
+      render :new
+    end
+  end
+
   def disable
     @item = Item.find(params[:item_id])
     @item.enabled = false
@@ -23,5 +42,11 @@ class Dashboard::ItemsController < Dashboard::BaseController
     item = Item.find(params[:id])
     item.destroy
     redirect_to dashboard_items_path
+  end
+
+  private
+
+  def item_params
+    params.require(:item).permit(:name, :description, :image_url, :base_price, :quantity)
   end
 end

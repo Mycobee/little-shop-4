@@ -1,3 +1,4 @@
+# This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
@@ -19,7 +20,7 @@ ActiveRecord::Schema.define(version: 20190401233104) do
     t.string "description"
     t.string "image_url", default: "https://emblemsbf.com/img/77148.jpg"
     t.integer "quantity", default: 0
-    t.float "base_price"
+    t.float "base_price", default: 0.0
     t.boolean "enabled", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -12,7 +12,7 @@ RSpec.describe "As a visitor" do
       @item_3 = @merch_1.items.create(name:"Item 3", description: "fooly", quantity: 10, base_price: 3.65 )
       @item_4 = @merch_3.items.create(name:"Item 4", description: "no way", quantity: 70, base_price: 5000.0, enabled: false )
       @item_5 = @merch_3.items.create(name:"Item 5", description: "expensive", quantity: 40, base_price: 456.0 )
-      @item_6 = @merch_1.items.create(name:"Item 6", description: "cheap", quantity: 5, base_price: "$1.0" )
+      @item_6 = @merch_1.items.create(name:"Item 6", description: "cheap", quantity: 5, base_price: 1.50 )
       @item_7 = @merch_1.items.create(name:"Item 7", description: "get lost", quantity: 0, base_price: 3.0, enabled: false  )
       @item_8 = @merch_4.items.create(name:"Item 8", description: "could do better", quantity: 490, base_price: 45.0 )
       visit root_path
