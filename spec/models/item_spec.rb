@@ -124,6 +124,7 @@ RSpec.describe Item, type: :model do
 
       user = create(:user)
       order_1 = create(:order, user: user)
+      order_2 = create(:order, user: user)
 
       unfulfilled_order_item = create(:order_item, order: order_1, item: item_6, quantity: 30)
       fulfilled_order_item_1 = create(:fulfilled_order_item, order: order_1, item: item_5, quantity: 1)
@@ -141,7 +142,7 @@ RSpec.describe Item, type: :model do
       fulfilled_order_item_13 = create(:fulfilled_order_item, order: order_1, item: item_14, quantity: 13)
       fulfilled_order_item_14 = create(:fulfilled_order_item, order: order_1, item: item_9, quantity: 14)
       fulfilled_order_item_15 = create(:fulfilled_order_item, order: order_1, item: item_1, quantity: 15)
-      fulfilled_order_item_15 = create(:fulfilled_order_item, order: order_1, item: item_1, quantity: 10)
+      fulfilled_order_item_16 = create(:fulfilled_order_item, order: order_2, item: item_1, quantity: 10)
 
       @top = [item_1, item_9, item_14, item_3, item_13]
       @bottom = [item_5, item_8, item_11, item_2, item_7]

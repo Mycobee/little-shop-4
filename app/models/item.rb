@@ -28,17 +28,19 @@ class Item < ApplicationRecord
   end
 
   def self.top_five
-    Item.joins(:order_items)
-    .order("order_items.quantity DESC")
-    .limit(5)
+    Item.joins(:order_items).select("items.*, sum(order_items.quantity) as total_quantity")
     .where("order_items.fulfilled = true")
+    .group(:id)
+    .order("total_quantity DESC")
+    .limit(5)
   end
 
   def self.bottom_five
-    Item.joins(:order_items)
-    .order("order_items.quantity.sum ASC")
-    .limit(5)
+    Item.joins(:order_items).select("items.*, sum(order_items.quantity) as total_quantity")
     .where("order_items.fulfilled = true")
+    .group(:id)
+    .order("total_quantity ASC")
+    .limit(5)
   end
 
   def quantity_bought
