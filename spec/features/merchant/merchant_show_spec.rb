@@ -206,20 +206,34 @@ RSpec.describe 'Merchant Show page shows profile information' do
           expect(item_1.quantity).to eq(0)
           expect(page).to have_content("Item fulfilled")
         end
+        describe "For each item of mine in the order" do
+          describe "If the users desired quantity is more than number in stock" do
+            it "There is a no fulfill button or link" do
+              merchant = create(:merchant)
+              allow_any_instance_of(ApplicationController).to \
+              receive(:current_user).and_return(merchant)
+
+              order = create(:order)
+
+              item_1 = create(:item, user: merchant, quantity: 10)
+              order_item_1 = create(:order_item, item: item_1, order: order, quantity: 20)
+              order_item_2 = create(:order_item, item: item_1, order: order, quantity: 5)
+
+              visit merchant_dashboard_path
+
+              within(".item-#{item_1.id}") do
+                expect(page).to_not have_button("Fulfill Item")
+              end
+          end
+        end
       end
     end
   end
 end
 
-  # As a merchant
-  # When I visit an order show page from my dashboard
-  # For each item of mine in the order
-  # If the user's desired quantity is equal to or less than my current inventory quantity for that item
-  # And I have not already "fulfilled" that item:
-  # - Then I see a button or link to "fulfill" that item
-  # - When I click on that link or button I am returned to the order show page
-  # - I see the item is now fulfilled
-  # - I also see a flash message indicating that I have fulfilled that item
-  # - My inventory quantity is permanently reduced by the user's desired quantity
-  #
-  # If I have already fulfilled this item, I see text indicating such.
+As a merchant
+When I visit an order show page from my dashboard
+For each item of mine in the order
+If the user's desired quantity is greater than my current inventory quantity for that item
+Then I do not see a "fulfill" button or link
+Instead I see a big red notice next to the item indicating I cannot fulfill this item
