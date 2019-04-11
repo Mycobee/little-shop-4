@@ -15,10 +15,10 @@ RSpec.describe 'Merchant Show page shows profile information' do
 
     click_button "Log In"
 
-    visit merchant_dashboard_path
+    visit dashboard_path
 
 
-    expect(current_path).to eq(merchant_dashboard_path)
+    expect(current_path).to eq(dashboard_path)
     expect(page).to have_content(@merch_user.name)
     expect(page).to have_content("Address: #{@merch_user.address}")
     expect(page).to have_content("City: #{@merch_user.city}")
@@ -54,17 +54,17 @@ RSpec.describe 'Merchant Show page shows profile information' do
       order_item_5 = OrderItem.create(order: order_2, item: item_5, quantity: 5, price: item_5.base_price)
       order_item_6 = OrderItem.create(order: order_2, item: item_6, quantity: 5, price: item_6.base_price)
 
-      visit merchant_dashboard_path
+      visit dashboard_path
 
         expect(page.all("ul")[3]).to have_content("Order Id: #{order_1.id}")
         expect(page.all("ul")[3]).to have_content("Date Created: #{order_1.created_at}")
         expect(page.all("ul")[3]).to have_content("Item Count: 12")
         expect(page.all("ul")[3]).to have_content("Total Value: 23.88")
 
-        expect(page.all("ul")[3]).to have_content("Order Id: #{order_2.id}")
-        expect(page.all("ul")[3]).to have_content("Date Created: #{order_2.created_at}")
-        expect(page.all("ul")[3]).to have_content("Item Count: 15")
-        expect(page.all("ul")[3]).to have_content("Total Value: 34.85")
+        expect(page.all("ul")[4]).to have_content("Order Id: #{order_2.id}")
+        expect(page.all("ul")[4]).to have_content("Date Created: #{order_2.created_at}")
+        expect(page.all("ul")[4]).to have_content("Item Count: 15")
+        expect(page.all("ul")[4]).to have_content("Total Value: 34.85")
       end
       it 'Each order id is a link to a show page' do
         merchant = create(:merchant)
@@ -93,7 +93,7 @@ RSpec.describe 'Merchant Show page shows profile information' do
         order_item_5 = OrderItem.create(order: order_2, item: item_5, quantity: 5, price: item_5.base_price)
         order_item_6 = OrderItem.create(order: order_2, item: item_6, quantity: 5, price: item_6.base_price)
 
-        visit merchant_dashboard_path
+        visit dashboard_path
 
         click_link("#{order_1.id}")
 
@@ -123,7 +123,7 @@ RSpec.describe 'Merchant Show page shows profile information' do
           order_item_5 = create(:order_item, item: item_5, order: order, quantity: 6)
 
 
-          visit merchant_dashboard_path
+          visit dashboard_path
 
           click_on "#{order.id}"
 
