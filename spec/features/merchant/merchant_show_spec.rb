@@ -184,7 +184,7 @@ RSpec.describe 'Merchant Show page shows profile information' do
           order_item_4 = create(:order_item, item: item_4, order: order, quantity: 9)
           order_item_5 = create(:order_item, item: item_5, order: order, quantity: 6)
 
-          visit merchant_dashboard_path
+          visit dashboard_path
 
           click_on "#{order.id}"
 
@@ -220,7 +220,7 @@ RSpec.describe 'Merchant Show page shows profile information' do
               order_item_1 = create(:order_item, item: item_1, order: order, quantity: 20)
               order_item_2 = create(:order_item, item: item_1, order: order, quantity: 5)
 
-              visit merchant_dashboard_path
+              visit dashboard_path
 
               click_on "#{order.id}"
 
@@ -239,7 +239,7 @@ RSpec.describe 'Merchant Show page shows profile information' do
               order_item_1 = create(:order_item, item: item_1, order: order, quantity: 20)
               order_item_2 = create(:order_item, item: item_1, order: order, quantity: 5)
 
-              visit merchant_dashboard_path
+              visit dashboard_path
 
               click_on "#{order.id}"
 
