@@ -10,9 +10,8 @@ RSpec.describe Item, type: :model do
   describe "Validations" do
     it {should validate_presence_of :name}
     it {should validate_presence_of :description}
-    it {should validate_presence_of :image_url}
-    it {should validate_presence_of :quantity}
-    it {should validate_presence_of :base_price}
+    it {should validate_numericality_of(:quantity).is_greater_than_or_equal_to(0)}
+    it {should validate_numericality_of(:base_price).is_greater_than_or_equal_to(0.00)}
   end
 
   describe "Instance Methods" do

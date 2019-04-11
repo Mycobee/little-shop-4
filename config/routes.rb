@@ -7,13 +7,8 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new', as: :login
   post '/login', to: 'sessions#create'
 
-
   get '/logout', to: 'sessions#destroy'
-  # get '/admin/users', to: 'admins#index'
-  #
-  # get '/admin/user', to: 'user#show'
-  # resources :admin_users do
-  #   resources :users, only: [:index, :show]
+
   post '/item/fulfill', to: 'dashboard/items#fulfill', as: :fullfill_item
 
   get '/profile', to: 'users#show', as: :profile
@@ -21,35 +16,24 @@ Rails.application.routes.draw do
   patch '/profile', to: 'users#update', as: :update_profile
 
   post '/merchant/disable', to: 'admin/merchants#disable', as: :disable_merchant_status
-
   post '/merchant/enable', to: 'admin/merchants#enable', as: :enable_merchant_status
 
   post '/item/disable', to: 'dashboard/items#disable', as: :disable_item_status
-
   post '/item/enable', to: 'dashboard/items#enable', as: :enable_item_status
 
   namespace :admin do
     resources :users, only: [:index, :show, :update]
     resources :merchants, only: [:show, :index, :update]
+    get '/', to: 'dashboard#show', as: :dashboard
   end
 
   resources :items, only:[:index, :show, :update, :destroy] do
   end
 
-  namespace :merchant do
-    get '/', to: 'dashboard#show', as: :dashboard
-  end
-
   namespace :dashboard do
-    resources :items, only:[:index, :new, :edit, :destroy]
+    resources :items, only:[:index, :new, :edit, :destroy, :create]
     resources :orders, only: [:show]
-  end
-  # scope module: 'dashboard', as: 'dashboard' do
-  #   resources :items, only:[:index]
-  # end
-  namespace :admin do
-    get '/', to: 'dashboard#show', as: :dashboard
-    # resources :items, # TODO
+    get '/', to: 'dashboard#show'
   end
 
   resources :merchants, only: [:index, :edit, :update] do
@@ -60,4 +44,3 @@ Rails.application.routes.draw do
 
   resources :carts, only: [:create, :show, :update]
 end
-  # get '/merchant/dashboard/:id', to:'merchant/dashboard#show'

@@ -1,0 +1,26 @@
+<% if @item.errors.any? %>
+  <% @item.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+<% end %>
+
+<%= form_for [@user, @item], url: dashboard_items_path  do |f| %>
+
+<p><%= f.label :name %></p>
+<p><%= f.text_field :name %></p>
+
+<p><%= f.label :description %></p>
+<p><%= f.text_field :description %></p>
+
+<p><label for="item_image_url">Image URL</label></p>
+<p><%= f.text_field :image_url %></p>
+
+<p><%= f.label :base_price %></p>
+<p><%= f.text_field :base_price%></p>
+
+<p><%= f.label :quantity %></p>
+<p><%= f.number_field :quantity %></p>
+
+<p><%= f.submit %></p>
+
+<% end %>
