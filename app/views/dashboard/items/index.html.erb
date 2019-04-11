@@ -11,6 +11,7 @@
       <li><%= image_tag(item.image_url) %></li>
       <li>My Price: $<%= item.base_price %></li>
       <li>Amount I Have: <%= item.quantity %></li>
+
       <li><%= button_to "Edit",  edit_dashboard_item_path(item) %></li>
       <% if item.enabled == false %>
       <li><%= button_to "Enable", enable_item_status_path(item_id: item.id) %></li>

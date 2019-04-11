@@ -4,17 +4,14 @@ class Dashboard::ItemsController < Dashboard::BaseController
   end
 
   def new
-    @user = current_user
-    @item = @user.items.new
+    @user = User.find(current_user.id)
+    @item = Item.new
   end
 
   def create
-    @user = current_user
+    @user = User.find(current_user.id)
     @item = @user.items.new(item_params)
     if @item.save
-      if @item.image_url == ""
-        @item.image_url = "https://emblemsbf.com/img/77148.jpg"
-      end
       flash[:notice] = "#{@item.name} was created"
       redirect_to dashboard_items_path
     else

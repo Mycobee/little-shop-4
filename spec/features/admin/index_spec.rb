@@ -28,7 +28,7 @@ RSpec.describe "As an admin user" do
       expect(page).to_not have_content(merchant_2.name)
       expect(page).to_not have_content(merchant_3.name)
     end
-    
+
     it 'each user name is a link to show page for that user' do
       admin = create(:admin)
       allow_any_instance_of(ApplicationController).to \
@@ -46,7 +46,7 @@ RSpec.describe "As an admin user" do
 
       expect(current_path).to eq(admin_user_path(user_1))
     end
-    
+
     it "Should show the date each user registered" do
       admin = create(:admin)
       allow_any_instance_of(ApplicationController).to \
@@ -64,7 +64,7 @@ RSpec.describe "As an admin user" do
       expect(page).to have_content(user_2.created_at)
       expect(page).to have_content(user_3.created_at)
     end
-    
+
     it 'shows a button to upgrade to merchant' do
       admin = create(:admin)
       allow_any_instance_of(ApplicationController).to \
@@ -81,7 +81,7 @@ RSpec.describe "As an admin user" do
       expect(page).to have_button("Upgrade to Merchant")
     end
   end
-  
+
   describe "When I visit the merchant index page" do
     describe "And click on the disable button" do
       it 'There is a flash message saying merchant account disabled' do
@@ -92,19 +92,19 @@ RSpec.describe "As an admin user" do
         merchant = create(:merchant)
 
         visit merchants_path
-        
+
         within(".merchant-activation-#{merchant.id}") do
           click_button('Disable')
         end
-        
+
         expect(current_path).to eq(merchants_path)
         within(".merchant-activation-#{merchant.id}") do
           expect(page).to_not have_button("Disable")
         end
         expect(page).to have_content("Merchant account has been disabled")
-        
+
         merchant = User.where(id: "#{merchant.id}").first
-       
+
         expect(merchant.enabled?).to eq(false)
       end
 
@@ -129,19 +129,19 @@ RSpec.describe "As an admin user" do
 
         visit merchants_path
 
-  
+
         within(".merchant-activation-#{merchant.id}") do
           click_button('Enable')
-        end        
-        
+        end
+
         expect(current_path).to eq(merchants_path)
         within(".merchant-activation-#{merchant.id}") do
           expect(page).to_not have_button("Enable")
         end
         expect(page).to have_content("Merchant account has been enabled")
-        
+
         merchant = User.where(id: "#{merchant.id}").first
-       
+
         expect(merchant.enabled?).to eq(true)
       end
 
@@ -152,7 +152,7 @@ RSpec.describe "As an admin user" do
         fill_in "Password", with: merchant.password
 
         click_button "Log In"
-        expect(current_path).to eq(merchant_dashboard_path)
+        expect(current_path).to eq(dashboard_path)
       end
     end
   end

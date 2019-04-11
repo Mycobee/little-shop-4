@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
         flash[:notice] = "Your credentials were incorrect"
         render :new
       end
-    else 
+    else
       flash[:notice] = "Access Denied"
         render :new
     end
@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
     if current_user.default?
       redirect_to profile_path
     elsif current_user.merchant?
-      redirect_to merchant_dashboard_path
+      redirect_to dashboard_path
     elsif current_user.admin?
       redirect_to admin_dashboard_path
     end
