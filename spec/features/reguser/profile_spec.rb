@@ -61,7 +61,7 @@ RSpec.describe 'As a registered user' do
 
         visit profile_orders_path(reg_user)
 
-        within("order-#{order_1.id}") do
+        within("#order-#{order_1.id}") do
           find_link("#{order_1.id}")
           expect(page).to have_content("Order Created: #{order_1.created_at}")
           expect(page).to have_content("Order updated: #{order_1.updated_at}")
@@ -70,16 +70,16 @@ RSpec.describe 'As a registered user' do
           expect(page).to have_content("Total Cost: #{order_1.grand_total}")
         end
 
-        within("order-#{order_2.id}") do
+        within("#order-#{order_2.id}") do
           find_link("#{order_2.id}")
-          expect(page).to have_content("Order Created: #{order_2.created_at}")  
+          expect(page).to have_content("Order Created: #{order_2.created_at}")
           expect(page).to have_content("Order updated: #{order_2.updated_at}")
           expect(page).to have_content(order_2.status)
           expect(page).to have_content("Total Items #{order_2.items.count}")
           expect(page).to have_content("Total Cost: #{order_2.grand_total}")
         end
 
-        within("order-#{order_3.id}") do
+        within("#order-#{order_3.id}") do
           find_link("#{order_3.id}")
           expect(page).to have_content("Order Created: #{order_3.created_at}")
           expect(page).to have_content("Order updated: #{order_3.updated_at}")
@@ -88,7 +88,7 @@ RSpec.describe 'As a registered user' do
           expect(page).to have_content("Total Cost: #{order_3.grand_total}")
         end
 
-        within("order-#{order_4.id}") do
+        within("#order-#{order_4.id}") do
           find_link("#{order_4.id}")
           expect(page).to have_content("Order Created: #{order_4.created_at}")
           expect(page).to have_content("Order updated: #{order_4.updated_at}")
