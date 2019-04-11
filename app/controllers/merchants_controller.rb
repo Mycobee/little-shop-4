@@ -7,6 +7,4 @@ class MerchantsController < ApplicationController
   def edit
     @merchant = User.find(params[:id])
   end
-
-  
 end

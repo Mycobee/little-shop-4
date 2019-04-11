@@ -28,8 +28,6 @@ RSpec.describe 'As an admin' do
 
     it 'I should see a link to upgrade the users account to become a merchant' do
       visit admin_user_path(@user)
-      #
-      # save_and_open_page
 
       click_link("Upgrade to Merchant")
 

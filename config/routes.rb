@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get '/logout', to: 'sessions#destroy'
 
+  post '/item/fulfill', to: 'dashboard/items#fulfill', as: :fullfill_item
+
   get '/profile', to: 'users#show', as: :profile
   get '/profile/edit', to: 'users#edit', as: :edit_profile
   patch '/profile', to: 'users#update', as: :update_profile
@@ -20,12 +22,12 @@ Rails.application.routes.draw do
   post '/item/enable', to: 'dashboard/items#enable', as: :enable_item_status
 
   namespace :admin do
-    resources :users, only: [:index, :show]
+    resources :users, only: [:index, :show, :update]
     resources :merchants, only: [:show, :index, :update]
     get '/', to: 'dashboard#show', as: :dashboard
   end
 
-  resources :items, only:[:index, :show] do
+  resources :items, only:[:index, :show, :update, :destroy] do
   end
 
   namespace :dashboard do

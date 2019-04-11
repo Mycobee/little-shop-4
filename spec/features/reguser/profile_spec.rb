@@ -6,7 +6,7 @@ RSpec.describe 'As a registered user' do
     it 'I see all of my personal data on the page except password' do
 
       @user = create(:user)
-
+      @merchant = create(:merchant)
       allow_any_instance_of(ApplicationController).to \
       receive(:current_user).and_return(@user)
 

@@ -20,7 +20,7 @@
   </li>
  </ul>
  <% @user.orders.each do |order| %>
-  <ul>
+  <ul class="order-<%= order.id %>">
    <li>Order Id: <%= link_to order.id, dashboard_order_path(order) %></li>
    <li>Date Created: <%= order.created_at %></li>
    <li>Item Count: <%= order.total_items %></li>

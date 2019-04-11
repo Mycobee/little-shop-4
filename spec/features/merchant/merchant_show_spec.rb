@@ -56,15 +56,18 @@ RSpec.describe 'Merchant Show page shows profile information' do
 
       visit dashboard_path
 
-        expect(page.all("ul")[3]).to have_content("Order Id: #{order_1.id}")
-        expect(page.all("ul")[3]).to have_content("Date Created: #{order_1.created_at}")
-        expect(page.all("ul")[3]).to have_content("Item Count: 12")
-        expect(page.all("ul")[3]).to have_content("Total Value: 23.88")
-
-        expect(page.all("ul")[4]).to have_content("Order Id: #{order_2.id}")
-        expect(page.all("ul")[4]).to have_content("Date Created: #{order_2.created_at}")
-        expect(page.all("ul")[4]).to have_content("Item Count: 15")
-        expect(page.all("ul")[4]).to have_content("Total Value: 34.85")
+        within(".order-#{order_1.id}") do
+        expect(page).to have_content("Order Id: #{order_1.id}")
+        expect(page).to have_content("Date Created: #{order_1.created_at}")
+        expect(page).to have_content("Item Count: 12")
+        expect(page).to have_content("Total Value: 23.88")
+        end
+        within(".order-#{order_2.id}") do
+        expect(page).to have_content("Order Id: #{order_2.id}")
+        expect(page).to have_content("Date Created: #{order_2.created_at}")
+        expect(page).to have_content("Item Count: 15")
+        expect(page).to have_content("Total Value: 34.85")
+        end
       end
       it 'Each order id is a link to a show page' do
         merchant = create(:merchant)
@@ -158,15 +161,94 @@ RSpec.describe 'Merchant Show page shows profile information' do
           expect(page).to_not have_link(item_5.name)
         end
       end
+      describe "When I visit an order show page from my dashboard" do
+        it "Items of a desired quantity can be fulfilled if I have as many or more than that item in stock" do
+          merchant = create(:merchant)
+          allow_any_instance_of(ApplicationController).to \
+          receive(:current_user).and_return(merchant)
+
+          order = create(:order)
+
+          item_1 = create(:item, user: merchant, quantity: 10)
+          item_2 = create(:item, user: merchant, quantity: 5)
+          item_3 = create(:item, user: merchant, quantity: 15)
+          item_4 = create(:item)
+          item_5 = create(:item)
+
+          order_item_1 = create(:order_item, item: item_1, order: order, quantity: 5)
+          order_item_2 = create(:order_item, item: item_1, order: order, quantity: 5)
+          order_item_3 = create(:order_item, item: item_2, order: order, quantity: 3)
+          order_item_4 = create(:order_item, item: item_2, order: order, quantity: 3)
+          order_item_5 = create(:order_item, item: item_3, order: order, quantity: 7)
+          order_item_6 = create(:order_item, item: item_3, order: order, quantity: 7)
+          order_item_4 = create(:order_item, item: item_4, order: order, quantity: 9)
+          order_item_5 = create(:order_item, item: item_5, order: order, quantity: 6)
+
+          visit merchant_dashboard_path
+
+          click_on "#{order.id}"
+
+          expect(current_path).to eq(dashboard_order_path(order))
+
+          within(".item-#{item_1.id}") do
+          click_button('Fulfill Item')
+          item_1.reload
+          item_1.order_items.each do |order_item|
+            order_item.reload
+          end
+          end
+          expect(current_path).to eq(dashboard_order_path(order))
+          expect(page).to have_content("#{item_1.name} fulfilled")
+          expect(item_1.quantity).to eq(0)
+
+          within(".item-#{item_1.id}") do
+          expect(item_1.fulfilled?).to eq(true)
+          expect(item_1.quantity).to eq(0)
+          expect(page).to have_content("Item fulfilled")
+        end
+      end
+        describe "For each item of mine in the order" do
+          describe "If the users desired quantity is more than number in stock" do
+            it "There is a no fulfill button or link" do
+              merchant = create(:merchant)
+              allow_any_instance_of(ApplicationController).to \
+              receive(:current_user).and_return(merchant)
+
+              order = create(:order)
+
+              item_1 = create(:item, user: merchant, quantity: 10)
+              order_item_1 = create(:order_item, item: item_1, order: order, quantity: 20)
+              order_item_2 = create(:order_item, item: item_1, order: order, quantity: 5)
+
+              visit merchant_dashboard_path
+
+              click_on "#{order.id}"
+
+              within(".item-#{item_1.id}")  do
+                expect(page).to_not have_button("Fulfill Item")
+            end
+          end
+            it "Instead I see a big red notice next to the item indicating I cannot fulfill this item" do
+              merchant = create(:merchant)
+              allow_any_instance_of(ApplicationController).to \
+              receive(:current_user).and_return(merchant)
+
+              order = create(:order)
+
+              item_1 = create(:item, user: merchant, quantity: 10)
+              order_item_1 = create(:order_item, item: item_1, order: order, quantity: 20)
+              order_item_2 = create(:order_item, item: item_1, order: order, quantity: 5)
+
+              visit merchant_dashboard_path
+
+              click_on "#{order.id}"
+
+              within(".item-#{item_1.id}")  do
+                expect(page).to have_content("Cannot fulfill item")
+            end
+            end
+          end
+        end
+      end
     end
   end
-  # As a merchant
-  # When I visit an order show page from my dashboard
-  # I see the customer's name and address
-  # I only the items in the order that are being purchased from my inventory
-  # I do not see any items in the order being purchased from other merchants
-  # For each item, I see the following information:
-  # - the name of the item, which is a link to my item's show page
-  # - a small thumbnail of the item
-  # - my price for the item
-  # - the quantity the user wants to purchase
