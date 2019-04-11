@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   def show
     require_user
     @user = current_user
+    @orders = @user.orders
   end
 
   def edit

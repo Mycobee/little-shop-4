@@ -1,6 +1,13 @@
+
 <h1><%= @user.name %> Profile</h1>
 
+
 <%= "Welcome, #{@user.name}" %>
+<br>
+<br>
+<% if @orders == [] %>
+<%= link_to "My Orders", '/profile/orders' %>
+<% end %>
 <ul>
   <li>
     <p>Address: <%= @user.address %></p>
