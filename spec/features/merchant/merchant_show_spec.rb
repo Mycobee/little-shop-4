@@ -56,15 +56,18 @@ RSpec.describe 'Merchant Show page shows profile information' do
 
       visit merchant_dashboard_path
 
-        expect(page.all("ul")[3]).to have_content("Order Id: #{order_1.id}")
-        expect(page.all("ul")[3]).to have_content("Date Created: #{order_1.created_at}")
-        expect(page.all("ul")[3]).to have_content("Item Count: 12")
-        expect(page.all("ul")[3]).to have_content("Total Value: 23.88")
-
-        expect(page.all("ul")[3]).to have_content("Order Id: #{order_2.id}")
-        expect(page.all("ul")[3]).to have_content("Date Created: #{order_2.created_at}")
-        expect(page.all("ul")[3]).to have_content("Item Count: 15")
-        expect(page.all("ul")[3]).to have_content("Total Value: 34.85")
+        within(".order-#{order_1.id}") do
+        expect(page).to have_content("Order Id: #{order_1.id}")
+        expect(page).to have_content("Date Created: #{order_1.created_at}")
+        expect(page).to have_content("Item Count: 12")
+        expect(page).to have_content("Total Value: 23.88")
+        end
+        within(".order-#{order_2.id}") do
+        expect(page).to have_content("Order Id: #{order_2.id}")
+        expect(page).to have_content("Date Created: #{order_2.created_at}")
+        expect(page).to have_content("Item Count: 15")
+        expect(page).to have_content("Total Value: 34.85")
+        end
       end
       it 'Each order id is a link to a show page' do
         merchant = create(:merchant)
@@ -158,5 +161,61 @@ RSpec.describe 'Merchant Show page shows profile information' do
           expect(page).to_not have_link(item_5.name)
         end
       end
+      describe "When I visit an order show page from my dashboard" do
+        it "Items of a desired quantity can be fulfilled if I have as many or more than that item in stock" do
+          merchant = create(:merchant)
+          allow_any_instance_of(ApplicationController).to \
+          receive(:current_user).and_return(merchant)
+
+          order = create(:order)
+
+          item_1 = create(:item, user: merchant, quantity: 10)
+          item_2 = create(:item, user: merchant, quantity: 5)
+          item_3 = create(:item, user: merchant, quantity: 15)
+          item_4 = create(:item)
+          item_5 = create(:item)
+
+          order_item_1 = create(:order_item, item: item_1, order: order, quantity: 5)
+          order_item_2 = create(:order_item, item: item_1, order: order, quantity: 5)
+          order_item_3 = create(:order_item, item: item_2, order: order, quantity: 3)
+          order_item_4 = create(:order_item, item: item_2, order: order, quantity: 3)
+          order_item_5 = create(:order_item, item: item_3, order: order, quantity: 7)
+          order_item_6 = create(:order_item, item: item_3, order: order, quantity: 7)
+          order_item_4 = create(:order_item, item: item_4, order: order, quantity: 9)
+          order_item_5 = create(:order_item, item: item_5, order: order, quantity: 6)
+
+          visit merchant_dashboard_path
+
+          click_on "#{order.id}"
+
+          expect(current_path).to eq(dashboard_order_path(order))
+
+          within(".item-#{item_1.id}") do
+          click_button('Fulfill Item')
+          item_1.reload
+          end
+          expect(current_path).to eq(dashboard_order_path(order))
+          expect(page).to have_content("#{item_1.name} fulfilled")
+          expect(item_1.quantity).to eq(0)
+
+          within(".item-#{item_1.id}") do
+          expect(item_1.quantity).to eq(0)
+          expect(page).to have_content("Item fulfilled")
+        end
+      end
     end
   end
+end
+
+  # As a merchant
+  # When I visit an order show page from my dashboard
+  # For each item of mine in the order
+  # If the user's desired quantity is equal to or less than my current inventory quantity for that item
+  # And I have not already "fulfilled" that item:
+  # - Then I see a button or link to "fulfill" that item
+  # - When I click on that link or button I am returned to the order show page
+  # - I see the item is now fulfilled
+  # - I also see a flash message indicating that I have fulfilled that item
+  # - My inventory quantity is permanently reduced by the user's desired quantity
+  #
+  # If I have already fulfilled this item, I see text indicating such.

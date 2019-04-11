@@ -19,6 +19,14 @@ class Dashboard::ItemsController < Dashboard::BaseController
     redirect_to dashboard_items_path
   end
 
+  def fulfill
+    @item = Item.find(params[:item_id])
+    @item.quantity = (@item.quantity - @item.order_items.item_quantity)
+    @item.save
+    flash[:notice] = "#{@item.name} fulfilled"
+    redirect_to dashboard_order_path(@item.orders.uniq)
+  end
+
   def destroy
     item = Item.find(params[:id])
     item.destroy
