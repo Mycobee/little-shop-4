@@ -193,12 +193,16 @@ RSpec.describe 'Merchant Show page shows profile information' do
           within(".item-#{item_1.id}") do
           click_button('Fulfill Item')
           item_1.reload
+          item_1.order_items.each do |order_item|
+            order_item.reload
+          end
           end
           expect(current_path).to eq(dashboard_order_path(order))
           expect(page).to have_content("#{item_1.name} fulfilled")
           expect(item_1.quantity).to eq(0)
 
           within(".item-#{item_1.id}") do
+          expect(item_1.fulfilled?).to eq(true)
           expect(item_1.quantity).to eq(0)
           expect(page).to have_content("Item fulfilled")
         end
