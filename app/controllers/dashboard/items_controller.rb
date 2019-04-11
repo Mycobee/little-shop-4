@@ -4,11 +4,6 @@ class Dashboard::ItemsController < Dashboard::BaseController
   end
 
   def new
-    @user = current_user
-    @item = @user.items.new
-  end
-  
-  def new
     @user = User.find(current_user.id)
     @item = Item.new
   end
