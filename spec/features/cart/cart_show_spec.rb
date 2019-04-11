@@ -70,11 +70,61 @@ RSpec.describe 'As a visitor or registered' do
   end
 
   describe 'When a visitor changes the quantity of items in my cart' do
-    it 'can change the quantity of the items in my cart' do
-      cart = Cart.new({})
-      item_1 = create(:item, base_price: 10)
-      item_2 = create(:item, base_price: 40)
+    before :each do
+      @cart = Cart.new({})
+      @item_1 = create(:item, base_price: 10, quantity: 40)
+      @item_2 = create(:item, base_price: 40)
+      @item_3 = create(:item, base_price: 40)
+      @item_4 = create(:item, base_price: 40)
+    end
 
+    it 'can change the quantity of the items in my cart' do
+
+
+      visit items_path
+
+      within "##{@item_1.id}" do
+          click_button "Add to Cart"
+      end
+
+      within "##{@item_2.id}" do
+          click_button "Add to Cart"
+      end
+
+      visit cart_path(@cart)
+
+      within(".quantity-count-#{@item_1.id}") do
+        fill_in 'Quantity', with: '1'
+        click_button("Change Quantity")
+
+        @item_1.reload
+
+        expect(@item_1.quantity).to eq(40)
+      end
+
+      expect(page).to have_content("Cart Has Been Updated.")
+      expect(page).to have_content("Cart: 2.0")
+
+      expect(page).to have_button("Remove From Cart")
+
+      within "#remove-#{@item_1.id}" do
+        click_button "Remove From Cart"
+      end
+      @item_1.reload
+
+      expect(@item_1.quantity).to eq(0)
+
+      within "#remove-#{@item_2.id}" do
+        click_button "Remove From Cart"
+      end
+
+      expect(page).to have_content("My Cart is Empty")
+    end
+
+    it 'cannot add more items then are available' do
+
+      item_1 = create(:item, base_price: 10, quantity: 40)
+      item_2 = create(:item, base_price: 10, quantity: 10)
       visit items_path
 
       within "##{item_1.id}" do
@@ -85,31 +135,15 @@ RSpec.describe 'As a visitor or registered' do
           click_button "Add to Cart"
       end
 
-      visit cart_path(cart)
+      visit cart_path(@cart)
 
       within(".quantity-count-#{item_1.id}") do
         fill_in 'Quantity', with: '8'
         click_button("Change Quantity")
 
         item_1.reload
-        expect(item_1.quantity).to eq(8)
+        expect(item_1.quantity).to_not eq(8)
       end
-
-      expect(page).to have_content("Cart Has Been Updated.")
-      expect(page).to have_button("Remove From Cart")
-
-      within "#remove-#{item_1.id}" do
-        click_button "Remove From Cart"
-      end
-      item_1.reload
-
-      expect(item_1.quantity).to eq(0)
-
-      within "#remove-#{item_2.id}" do
-        click_button "Remove From Cart"
-      end
-
-      expect(page).to have_content("My Cart is Empty")
     end
   end
 end
