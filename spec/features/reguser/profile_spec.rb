@@ -56,7 +56,7 @@ RSpec.describe 'As a registered user' do
   end
   describe "When I visit my profile orders page /profile/orders" do
     describe "I see every order i've made" do
-      it "Including order id, date created, date updated, status, item quantity, total items" do
+      xit "Including order id, date created, date updated, status, item quantity, total items" do
 
         reg_user = create(:user)
 
@@ -95,7 +95,7 @@ RSpec.describe 'As a registered user' do
         visit profile_orders_path(reg_user)
 
 
-        expect(page).to have
+
         within("#order-#{order_1.id}") do
           find_link("#{order_1.id}")
           expect(page).to have_content("Order Created: #{order_1.created_at}")

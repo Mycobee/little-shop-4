@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   patch '/profile', to: 'users#update', as: :update_profile
 
-  get '/profile/orders', to: 'user/orders#index', as: :profile_orders
+  # get '/profile/orders', to: 'user/orders#index', as: :profile_orders
 
   post '/merchant/disable', to: 'admin/merchants#disable', as: :disable_merchant_status
   post '/merchant/enable', to: 'admin/merchants#enable', as: :enable_merchant_status
