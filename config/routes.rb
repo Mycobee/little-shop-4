@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'users#show', as: :profile
   get '/profile/edit', to: 'users#edit', as: :edit_profile
+  get '/profile/orders', to: 'profile/orders#index', as: :profile_orders
+
   patch '/profile', to: 'users#update', as: :update_profile
 
   post '/merchant/disable', to: 'admin/merchants#disable', as: :disable_merchant_status
