@@ -206,6 +206,7 @@ RSpec.describe 'Merchant Show page shows profile information' do
           expect(item_1.quantity).to eq(0)
           expect(page).to have_content("Item fulfilled")
         end
+      end
         describe "For each item of mine in the order" do
           describe "If the users desired quantity is more than number in stock" do
             it "There is a no fulfill button or link" do
@@ -221,19 +222,33 @@ RSpec.describe 'Merchant Show page shows profile information' do
 
               visit merchant_dashboard_path
 
-              within(".item-#{item_1.id}") do
+              click_on "#{order.id}"
+
+              within(".item-#{item_1.id}")  do
                 expect(page).to_not have_button("Fulfill Item")
-              end
+            end
+          end
+            it "Instead I see a big red notice next to the item indicating I cannot fulfill this item" do
+              merchant = create(:merchant)
+              allow_any_instance_of(ApplicationController).to \
+              receive(:current_user).and_return(merchant)
+
+              order = create(:order)
+
+              item_1 = create(:item, user: merchant, quantity: 10)
+              order_item_1 = create(:order_item, item: item_1, order: order, quantity: 20)
+              order_item_2 = create(:order_item, item: item_1, order: order, quantity: 5)
+
+              visit merchant_dashboard_path
+
+              click_on "#{order.id}"
+
+              within(".item-#{item_1.id}")  do
+                expect(page).to have_content("Cannot fulfill item")
+            end
+            end
           end
         end
       end
     end
   end
-end
-
-As a merchant
-When I visit an order show page from my dashboard
-For each item of mine in the order
-If the user's desired quantity is greater than my current inventory quantity for that item
-Then I do not see a "fulfill" button or link
-Instead I see a big red notice next to the item indicating I cannot fulfill this item
