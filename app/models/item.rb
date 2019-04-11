@@ -24,6 +24,10 @@ class Item < ApplicationRecord
       false
     elsif (self.id == (order_items.first.item_id) && (order_items.first.fulfilled == true))
       true
+    elsif order_items.each do |order_item|
+      order_item.fulfilled? == false
+    end
+    false
     end
   end
 

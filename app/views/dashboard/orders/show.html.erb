@@ -14,5 +14,15 @@
   <li>
     <%= item.order_items.item_quantity %>
   </li>
+  <% if item.quantity >= item.order_items.item_quantity && item.fulfilled? == false %>
+  <li>
+    <%= button_to "Fulfill Item", fullfill_item_path(item_id: item.id) %>
+  </li>
+  <% end %>
+  <% if item.fulfilled? == true %>
+  <li>
+    <%= "Item fulfilled" %>
+  </li>
+  <% end %>
 </ul>
 <% end %>

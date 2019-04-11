@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # get '/admin/user', to: 'user#show'
   # resources :admin_users do
   #   resources :users, only: [:index, :show]
+  post '/item/fulfill', to: 'dashboard/items#fulfill', as: :fullfill_item
 
   get '/profile', to: 'users#show', as: :profile
   get '/profile/edit', to: 'users#edit', as: :edit_profile
@@ -35,6 +36,8 @@ Rails.application.routes.draw do
   resources :items, only:[:index, :show, :update, :destroy] do
   end
 
+
+
   namespace :merchant do
     get '/', to: 'dashboard#show', as: :dashboard
   end
@@ -46,7 +49,6 @@ Rails.application.routes.draw do
   # scope module: 'dashboard', as: 'dashboard' do
   #   resources :items, only:[:index]
   # end
-
   namespace :admin do
     get '/', to: 'dashboard#show', as: :dashboard
     # resources :items, # TODO
