@@ -10,7 +10,7 @@
     <div class="quantity-count-<%= @cart.item_display(id).id %>">
       <%= form_for @cart.item_display(id), url: item_path(@cart.item_display(id)) do |f| %>
       <p><%= f.label :quantity %>
-      <%= f.number_field :quantity %></p>
+      <%= f.number_field :quantity, min: 0 %></p>
       <br>
       <%= f.submit "Change Quantity" %>
       <br>
@@ -26,7 +26,6 @@
     <%= button_to "Remove From Cart", item_path(@cart.item_display(id)), :method=> :delete %>
   </div>
   <% end %>
-
   <h3>Total Price: $<%= @cart.grand_total %></h3>
   <%= link_to "Empty Cart", cart_path(@cart), :method=> :put %>
 <% end %>

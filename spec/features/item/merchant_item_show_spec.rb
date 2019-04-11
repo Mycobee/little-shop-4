@@ -13,12 +13,12 @@ RSpec.describe "As a merchant" do
 
       click_button "Log In"
 
-      visit merchant_dashboard_path
+      visit dashboard_path
     end
 
     it "should see a link to go to the merchants items page" do
 
-      expect(current_path).to eq(merchant_dashboard_path)
+      expect(current_path).to eq(dashboard_path)
 
 
       click_link "Merchant Items Page"

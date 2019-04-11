@@ -20,5 +20,6 @@
   </li>
   <li>
     <p><%= link_to "Edit Profile", '/profile/edit' %></p>
+    <%= link_to "Downgrade to User", admin_user_path(@user), :method=> :put %></p>
   </li>
  </ul>

@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-
   def new
     @user = User.new
   end
@@ -17,7 +16,9 @@ class UsersController < ApplicationController
   end
 
   def show
+    require_user
     @user = current_user
+    @orders = @user.orders
   end
 
   def edit
@@ -31,6 +32,10 @@ class UsersController < ApplicationController
       flash[:notice] = "Profile Information Updated."
       redirect_to profile_path
     end
+  end
+
+  def require_user
+    render file:"/public/404" unless current_user.role == "default"
   end
 
 # name: params[:name], address: params[:address], city: params[:city], zip_code: params[:zip_code], email: params[:email], password: params[:]

@@ -22,7 +22,11 @@ class Admin::MerchantsController < ApplicationController
     flash[:notice] = "Merchant account has been enabled"
     redirect_to merchants_path
   end
-  
+
+  def downgrade
+    @merchant = User.find(params[:merchant])
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.role == "default" && current_admin? == true

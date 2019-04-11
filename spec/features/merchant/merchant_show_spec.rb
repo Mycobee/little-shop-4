@@ -15,10 +15,10 @@ RSpec.describe 'Merchant Show page shows profile information' do
 
     click_button "Log In"
 
-    visit merchant_dashboard_path
+    visit dashboard_path
 
 
-    expect(current_path).to eq(merchant_dashboard_path)
+    expect(current_path).to eq(dashboard_path)
     expect(page).to have_content(@merch_user.name)
     expect(page).to have_content("Address: #{@merch_user.address}")
     expect(page).to have_content("City: #{@merch_user.city}")
@@ -54,7 +54,7 @@ RSpec.describe 'Merchant Show page shows profile information' do
       order_item_5 = OrderItem.create(order: order_2, item: item_5, quantity: 5, price: item_5.base_price)
       order_item_6 = OrderItem.create(order: order_2, item: item_6, quantity: 5, price: item_6.base_price)
 
-      visit merchant_dashboard_path
+      visit dashboard_path
 
         within(".order-#{order_1.id}") do
         expect(page).to have_content("Order Id: #{order_1.id}")
@@ -96,7 +96,7 @@ RSpec.describe 'Merchant Show page shows profile information' do
         order_item_5 = OrderItem.create(order: order_2, item: item_5, quantity: 5, price: item_5.base_price)
         order_item_6 = OrderItem.create(order: order_2, item: item_6, quantity: 5, price: item_6.base_price)
 
-        visit merchant_dashboard_path
+        visit dashboard_path
 
         click_link("#{order_1.id}")
 
@@ -126,7 +126,7 @@ RSpec.describe 'Merchant Show page shows profile information' do
           order_item_5 = create(:order_item, item: item_5, order: order, quantity: 6)
 
 
-          visit merchant_dashboard_path
+          visit dashboard_path
 
           click_on "#{order.id}"
 
@@ -184,7 +184,7 @@ RSpec.describe 'Merchant Show page shows profile information' do
           order_item_4 = create(:order_item, item: item_4, order: order, quantity: 9)
           order_item_5 = create(:order_item, item: item_5, order: order, quantity: 6)
 
-          visit merchant_dashboard_path
+          visit dashboard_path
 
           click_on "#{order.id}"
 
@@ -220,7 +220,7 @@ RSpec.describe 'Merchant Show page shows profile information' do
               order_item_1 = create(:order_item, item: item_1, order: order, quantity: 20)
               order_item_2 = create(:order_item, item: item_1, order: order, quantity: 5)
 
-              visit merchant_dashboard_path
+              visit dashboard_path
 
               click_on "#{order.id}"
 
@@ -239,7 +239,7 @@ RSpec.describe 'Merchant Show page shows profile information' do
               order_item_1 = create(:order_item, item: item_1, order: order, quantity: 20)
               order_item_2 = create(:order_item, item: item_1, order: order, quantity: 5)
 
-              visit merchant_dashboard_path
+              visit dashboard_path
 
               click_on "#{order.id}"
 

@@ -4,9 +4,8 @@ class Item < ApplicationRecord
   belongs_to :user
   validates_presence_of :name
   validates_presence_of :description
-  validates_presence_of :image_url
-  validates_presence_of :quantity
-  validates_presence_of :base_price
+  validates_numericality_of :quantity, greater_than_or_equal_to: 0
+  validates_numericality_of :base_price, greater_than_or_equal_to: 0.00
 
   def merchant_name
    user.name

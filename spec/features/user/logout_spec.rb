@@ -22,7 +22,7 @@ RSpec.describe 'As all registered users' do
             fill_in 'Email', with: merchant.email
             fill_in 'Password', with: merchant.password
             click_button("Log In")
-            expect(current_path).to eq(merchant_dashboard_path)
+            expect(current_path).to eq(dashboard_path)
             click_link("Log Out")
             expect(current_path).to eq(root_path)
             expect(page).to have_content("You are logged out")

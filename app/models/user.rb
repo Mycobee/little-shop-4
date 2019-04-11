@@ -13,6 +13,11 @@ class User < ApplicationRecord
 
   enum role: [:default, :merchant, :admin]
 
+  def item_disable
+    items.where(user_id: id)
+        .update_all(enabled: false)
+  end
+
   def orders
     Order.joins(:items).where("items.user_id = ?", self.id).uniq
   end

@@ -152,7 +152,7 @@ RSpec.describe "As an admin user" do
         fill_in "Password", with: merchant.password
 
         click_button "Log In"
-        expect(current_path).to eq(merchant_dashboard_path)
+        expect(current_path).to eq(dashboard_path)
       end
     end
   end
