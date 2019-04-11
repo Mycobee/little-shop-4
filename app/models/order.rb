@@ -15,6 +15,11 @@ class Order < ApplicationRecord
   def self.sort_by_status
     Order.order(status: :asc)
   end
+
+  def grand_total
+    binding.pry
+    items
+  end
 end
 
 # Order.select("date(created_at) as ordered_date, sum(price) as total_price").group("date(created_at)")
