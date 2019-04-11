@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   post '/item/enable', to: 'dashboard/items#enable', as: :enable_item_status
 
   namespace :admin do
-    resources :users, only: [:index, :show]
+    resources :users, only: [:index, :show, :update]
     resources :merchants, only: [:show, :index, :update]
   end
 

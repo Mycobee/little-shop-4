@@ -16,6 +16,26 @@ RSpec.describe User, type: :model do
     it {should validate_presence_of :state}
     it {should validate_presence_of :zip_code}
   end
+
+  describe 'Instance Methods' do
+    it '#item_disable' do
+     new_merchant = create(:merchant)
+     item_1 = create(:item)
+     item_2 = create(:item)
+     item_3 = create(:item)
+     new_merchant.items << [item_1, item_2, item_3]
+     new_merchant.item_disable 
+
+     item_1.reload
+     item_2.reload
+     item_3.reload
+
+     expect(item_1.enabled).to eq(false)
+     expect(item_2.enabled).to eq(false)
+     expect(item_3.enabled).to eq(false)
+    end
+  end
+
   describe 'Instance Methods' do
     it '.orders should return all order in which a merchant has an associated item' do
       merchant = create(:merchant)
@@ -40,7 +60,7 @@ RSpec.describe User, type: :model do
 
       order_item_1 = OrderItem.create(order: order_1, item: item_1, quantity: 3, price: item_1.base_price)
       order_item_2 = OrderItem.create(order: order_1, item: item_2, quantity: 4, price: item_2.base_price)
-      order_item_3 = OrderItem.create(order: order_1, item: item_3, quantity: 5, price: item_3.base_price)
+      orderi_tem_3 = OrderItem.create(order: order_1, item: item_3, quantity: 5, price: item_3.base_price)
 
       order_item_4 = OrderItem.create(order: order_2, item: item_4, quantity: 5, price: item_4.base_price)
       order_item_5 = OrderItem.create(order: order_2, item: item_5, quantity: 5, price: item_5.base_price)
